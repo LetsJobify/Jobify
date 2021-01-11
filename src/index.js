@@ -9,14 +9,27 @@ import './stylesheets/styles.scss';
 
 // Set color theme throughout application.
 const colors = {
-  brand: {
-    900: "#1a365d",
-    800: "#153e75",
-    700: "#2a69ac",
+  light: {
+    100: "#EDF5FA",
+    200: "#D8E5EE",
+    300: "#C3D5E1",
+    400: "#ADC5D5",
+    500: "#154B6F"
   },
+  dark: {
+    100: "#527296",
+    200: "#213F6A",
+    300: "#082149",
+    400: "#54545E",
+    500: "#0A1626"
+  }
 };
 
 const theme = extendTheme({ colors });
+
+
+
+
 
 render(
   <ChakraProvider theme={theme}>
