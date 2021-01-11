@@ -1,2 +1,9 @@
-.navbar {
+.flex {
+  display: inline-flex;
+  flex-direction: row-reverse;
+}
+
+.reg {
+  width: 50vw;
+  height: 50vw;
 }
