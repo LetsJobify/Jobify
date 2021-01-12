@@ -157,7 +157,7 @@ export default function Register() {
           // This is JSX that renders the login component.
           <div>
             <Box
-              bg={`${colorMode}.100`}
+              bg={`${colorMode}.400`}
               maxW="lg"
               borderWidth="1px"
               borderRadius="lg"
