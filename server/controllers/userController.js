@@ -76,7 +76,7 @@ userController.verifyUser = (req, res, next) => {
   const allUserValue = [email];
   db.query(allUser, allUserValue)
     .then((data) => {
-      // console.log('this is the data from the user ', data);
+      console.log('this is the data from the user ', data.rows);
       if (data.rows[0].password === password) {
         res.locals.isVerified = true;
         res.locals.userInfo = data.rows;
@@ -105,7 +105,6 @@ userController.createUser = (req, res, next) => {
     return res.status(500).send('You need to put in user and password! ');
   }
 
-  
   const value = [
     String(email),
     String(password),
