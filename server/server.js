@@ -3,6 +3,8 @@ const path = require('path');
 const interviewRouter = require('./routes/interview');
 const userRouter = require('./routes/user');
 const companyRouter = require('./routes/company');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 // Define server variables
 const PORT = 3000;
@@ -10,6 +12,8 @@ const app = express();
 
 // Parse body
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Define route handler
 app.use('/interview', interviewRouter);
