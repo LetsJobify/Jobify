@@ -41,14 +41,7 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-<<<<<<< HEAD
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../src/index.html'));
-});
-
-=======
 // start server
->>>>>>> 2325df33ff5996a7a606fb837fb3946d92360783
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}.`);
 });
