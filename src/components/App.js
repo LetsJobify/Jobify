@@ -17,13 +17,13 @@ export default function App() {
   // If the user is authenticated, render the Home.js component.
   // Otherwise, we need to render the Register.js component to allow them to register/sign in.
   const [loggedIn, setLogin] = useState(false);
-  
+
   // Define the values that will go into the Global State Context.
   const GlobalStateValue = {
     colorMode,
     toggleColorMode,
     loggedIn,
-    setLogin
+    setLogin,
   };
 
   return (
