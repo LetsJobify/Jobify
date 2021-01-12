@@ -8,12 +8,16 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  Spinner,
 } from '@chakra-ui/react';
 import { EmailIcon, UnlockIcon } from '@chakra-ui/icons';
 
 export default function Register() {
   // Importing color mode for day/night logic.
   const { colorMode, setLogin } = useContext(GlobalStateContext);
+
+  // Set up "loading" state.
+  const [ isLoading, setIsLoading ] = useState(false);
 
   // Local state to show password values.
   const [show, setShow] = useState(false);
@@ -57,7 +61,8 @@ export default function Register() {
       }),
     };
     
-
+    // We are loading now.
+    setIsLoading(true);
     // Send a request to the server.
     const response = await fetch('/user/', request);
     const serverResponse = await response.json();
@@ -79,7 +84,7 @@ export default function Register() {
         registerPassword: ''
       }
     );
-    
+    setIsLoading(false);
   }
 
   // When a login form is submitted.
@@ -96,6 +101,8 @@ export default function Register() {
     }),
   };
   
+  // We are loading now.
+  setIsLoading(true);
   // Send a request to the server.
   const response = await fetch('/user/', request);
   const serverResponse = await response.json();
@@ -114,125 +121,133 @@ export default function Register() {
       loginPassword: ''
     }
   );
-
+  setIsLoading(false);
   }
 
 
   return (
-    <div className='__register--Login'>
-      <div>
-        {currentUserWindow ? (
-          // This is JSX that renders the register component.
-          <div>
-            <Box
-              bg={`${colorMode}.100`}
-              maxW="lg"
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-            >
-              <InputGroup>
-                <Input 
-                  focusBorderColor="grey" 
-                  placeholder="Enter first name" 
-                  value={registerState.firstName}
-                  onChange={e => setRegisterState({...registerState, firstName: e.target.value})} />
-                <Input 
-                  focusBorderColor="grey" 
-                  placeholder="Enter last name" 
-                  value={registerState.lastName}
-                  onChange={e => setRegisterState({...registerState, lastName: e.target.value})} />
-              </InputGroup>
-              <InputGroup>
-                <InputLeftElement pointerEvents="none" children={<EmailIcon />} />
-                <Input 
-                  focusBorderColor="grey" 
-                  placeholder="Enter email address" 
-                  value={registerState.registerEmail}
-                  onChange={e => setRegisterState({...registerState, registerEmail: e.target.value})}
-                />
-              </InputGroup>
-              <InputGroup>
-                <InputLeftElement pointerEvents="none" children={<UnlockIcon />} />
-                <Input
-                  focusBorderColor="grey"
-                  pr="4.5rem"
-                  type={show ? 'text' : 'password'}
-                  placeholder="Enter password"
-                  value={registerState.registerPassword}
-                  onChange={e => setRegisterState({...registerState, registerPassword: e.target.value})}
-                />
-                <InputRightElement width="4.5rem">
-                  <Button h="1.75rem" size="sm" onClick={handleClick}>
-                    {show ? 'Hide' : 'Show'}
+    <div>
+      {isLoading ? 
+      <Center>
+        <Spinner size="xl" className='spinner' /> 
+      </Center>
+      :
+      <div className='__register--Login'>
+        <div>
+          {currentUserWindow ? (
+            // This is JSX that renders the register component.
+            <div>
+              <Box
+                bg={`${colorMode}.100`}
+                maxW="lg"
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden"
+              >
+                <InputGroup>
+                  <Input 
+                    focusBorderColor="grey" 
+                    placeholder="Enter first name" 
+                    value={registerState.firstName}
+                    onChange={e => setRegisterState({...registerState, firstName: e.target.value})} />
+                  <Input 
+                    focusBorderColor="grey" 
+                    placeholder="Enter last name" 
+                    value={registerState.lastName}
+                    onChange={e => setRegisterState({...registerState, lastName: e.target.value})} />
+                </InputGroup>
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none" children={<EmailIcon />} />
+                  <Input 
+                    focusBorderColor="grey" 
+                    placeholder="Enter email address" 
+                    value={registerState.registerEmail}
+                    onChange={e => setRegisterState({...registerState, registerEmail: e.target.value})}
+                  />
+                </InputGroup>
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none" children={<UnlockIcon />} />
+                  <Input
+                    focusBorderColor="grey"
+                    pr="4.5rem"
+                    type={show ? 'text' : 'password'}
+                    placeholder="Enter password"
+                    value={registerState.registerPassword}
+                    onChange={e => setRegisterState({...registerState, registerPassword: e.target.value})}
+                  />
+                  <InputRightElement width="4.5rem">
+                    <Button h="1.75rem" size="sm" onClick={handleClick}>
+                      {show ? 'Hide' : 'Show'}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+                <Center mt="3" mb="3">
+                  <Button 
+                    variant="outline" 
+                    height="48px" 
+                    width="200px"
+                    onClick={handleRegister}
+                  >
+                    Register
                   </Button>
-                </InputRightElement>
-              </InputGroup>
-              <Center mt="3" mb="3">
-                <Button 
-                  variant="outline" 
-                  height="48px" 
-                  width="200px"
-                  onClick={handleRegister}
-                >
-                  Register
+                </Center>
+                <Button size="xs" mt="2" onClick={handleWindow}>
+                  Log in instead?
                 </Button>
-              </Center>
-              <Button size="xs" mt="2" onClick={handleWindow}>
-                Log in instead?
-              </Button>
-            </Box>
-          </div>
-        ) : (
-          // This is JSX that renders the login component.
-          <div>
-            <Box
-              bg={`${colorMode}.400`}
-              maxW="lg"
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-            >
-              <InputGroup>
-                <InputLeftElement pointerEvents="none" children={<EmailIcon />} />
-                <Input 
-                  placeholder="Enter email address"
-                  value={loginState.loginEmail}
-                  onChange={e => setLoginState({...loginState, loginEmail: e.target.value})} 
-                />
-              </InputGroup>
-              <InputGroup>
-                <InputLeftElement pointerEvents="none" children={<UnlockIcon />} />
-                <Input
-                  pr="4.5rem"
-                  type={show ? 'text' : 'password'}
-                  placeholder="Enter password"
-                  value={loginState.loginPassword}
-                  onChange={e => setLoginState({...loginState, loginPassword: e.target.value})}
-                />
-                <InputRightElement width="4.5rem">
-                  <Button h="1.75rem" size="sm" onClick={handleClick}>
-                    {show ? 'Hide' : 'Show'}
+              </Box>
+            </div>
+          ) : (
+            // This is JSX that renders the login component.
+            <div>
+              <Box
+                bg={`${colorMode}.400`}
+                maxW="lg"
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden"
+              >
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none" children={<EmailIcon />} />
+                  <Input 
+                    placeholder="Enter email address"
+                    value={loginState.loginEmail}
+                    onChange={e => setLoginState({...loginState, loginEmail: e.target.value})} 
+                  />
+                </InputGroup>
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none" children={<UnlockIcon />} />
+                  <Input
+                    pr="4.5rem"
+                    type={show ? 'text' : 'password'}
+                    placeholder="Enter password"
+                    value={loginState.loginPassword}
+                    onChange={e => setLoginState({...loginState, loginPassword: e.target.value})}
+                  />
+                  <InputRightElement width="4.5rem">
+                    <Button h="1.75rem" size="sm" onClick={handleClick}>
+                      {show ? 'Hide' : 'Show'}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+                <Center mt="3" mb="3">
+                  <Button 
+                    variant="outline" 
+                    height="48px" 
+                    width="200px" 
+                    onClick={handleLogin} 
+                  >
+                    Login
                   </Button>
-                </InputRightElement>
-              </InputGroup>
-              <Center mt="3" mb="3">
-                <Button 
-                  variant="outline" 
-                  height="48px" 
-                  width="200px" 
-                  onClick={handleLogin} 
-                >
-                  Login
+                </Center>
+                <Button size="xs" mt="2" onClick={handleWindow}>
+                  Register instead?
                 </Button>
-              </Center>
-              <Button size="xs" mt="2" onClick={handleWindow}>
-                Register instead?
-              </Button>
-            </Box>
-          </div>
-        )}
+              </Box>
+            </div>
+          )}
+        </div>
       </div>
+    }
     </div>
   );
 }
