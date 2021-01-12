@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { GlobalStateContext } from './App';
 import {
   Box,
@@ -19,15 +19,23 @@ import {
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 export default function Nav() {
-  const { colorMode, toggleColorMode, setLogin } = useContext(GlobalStateContext);
+
+  const { colorMode, toggleColorMode, loggedIn, setLogin } = useContext(GlobalStateContext);
 
   return (
     <div>
       <Box bg={`${colorMode}.200`} pb="2">
+
+        {loggedIn ? 
         <Button onClick={toggleColorMode} className="" ml="2" mr="2" mt="-1">
           {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
+        </Button> :
+        <Button onClick={toggleColorMode} className="" ml="2" mr="2" mt="2">
+          {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
         </Button>
+        }
 
+        {loggedIn ? 
         <div className="flex">
           <Menu>
             <MenuButton
@@ -48,7 +56,7 @@ export default function Nav() {
           </Menu>
 
           <Router>
-            <Link to="/Home">
+            <Link to="/">
               <Button mt="2" mr="2">
                 <CalendarIcon />
               </Button>
@@ -73,6 +81,9 @@ export default function Nav() {
             </Link>
           </Router>
         </div>
+        : 
+        <span></span>
+        }
       </Box>
     </div>
   );

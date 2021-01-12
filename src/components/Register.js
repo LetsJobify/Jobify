@@ -49,21 +49,21 @@ export default function Register() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        firstName: registerState.firstName,
-        lastName: registerState.lastName,
+        first_name: registerState.firstName,
+        last_name: registerState.lastName,
         email: registerState.email,
         password: registerState.password,
       }),
     };
-
     setLogin(true);
+    
     // Send a request to the server.
     const response = await fetch('/user/', request);
     const serverResponse = await response.json();
 
     // If good response from server. do this.
     // if (blah) then...
-    
+    setLogin(true);
   }
 
   // When a login form is submitted.
@@ -79,12 +79,12 @@ export default function Register() {
     pasword: loginState.password,
     }),
   };
-  setLogin(true);
+  
   const response = await fetch('/user/', request);
   const serverResponse = await response.json();
   
   //if login is successful
-  // setLogin(true)
+  setLogin(true);
   }
 
 
