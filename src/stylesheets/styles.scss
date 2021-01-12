@@ -1,4 +1,13 @@
 .flex {
   display: inline-flex;
   flex-direction: row-reverse;
+  // Don't know how to fix this shit yet.
+  position: relative;
+  left: 62%;
+}
+
+.__register--Login {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh;
 }
