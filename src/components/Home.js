@@ -6,32 +6,29 @@ import {
   Tabs,
   TabList,
   TabPanel,
-  TabPanels
+  TabPanels,
 } from '@chakra-ui/react';
-import Calendar from './CalendarComponent';
+import CalendarComponent from './CalendarComponent';
 
 export default function Home() {
-
   // Show or hide the interview form.
   const [showInterviewForm, setShowInterviewForm] = useState(false);
 
   return (
     <div>
-      <Tabs>
+      {/* <Tabs>
         <TabList>
           <Tab>Interview</Tab>
           <Tab>Calendar</Tab>
-        </TabList>
+        </TabList> */}
 
-        <TabPanels>
-          <TabPanel>
-
-          </TabPanel>
-          <TabPanel>
-            {/* <Calendar /> */}
-          </TabPanel>
+      {/* <TabPanels>
+          <TabPanel></TabPanel>
+          <TabPanel> */}
+      <CalendarComponent />
+      {/* </TabPanel>
         </TabPanels>
-      </Tabs>
+      </Tabs> */}
     </div>
-  )
+  );
 }
