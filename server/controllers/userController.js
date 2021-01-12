@@ -100,6 +100,7 @@ userController.verifyUser = (req, res, next) => {
 userController.createUser = (req, res, next) => {
   const { email, password, avatar, first_name, last_name } = req.body;
 
+  console.log(req.body);
   // make sure there's valid input
   if (!email || !password) {
     return res.status(500).send('You need to put in user and password! ');

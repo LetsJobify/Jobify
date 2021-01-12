@@ -49,21 +49,37 @@ export default function Register() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        avatar: '',
         first_name: registerState.firstName,
         last_name: registerState.lastName,
-        email: registerState.email,
-        password: registerState.password,
+        email: registerState.registerEmail,
+        password: registerState.registerPassword,
       }),
     };
-    setLogin(true);
     
+
     // Send a request to the server.
     const response = await fetch('/user/', request);
     const serverResponse = await response.json();
 
-    // If good response from server. do this.
-    // if (blah) then...
-    setLogin(true);
+    // If successful new user.
+    if (serverResponse === 'Success') {
+      // "Log in" to the database.
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+    // Reset state values after login.
+    setRegisterState(
+      {...registerState,
+        avatar: '',
+        firstName: '',
+        lastName: '',
+        registerEmail: '',
+        registerPassword: ''
+      }
+    );
+    
   }
 
   // When a login form is submitted.
@@ -75,16 +91,30 @@ export default function Register() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-    email: loginState.email,
-    pasword: loginState.password,
+    email: loginState.loginEmail,
+    password: loginState.loginPassword,
     }),
   };
   
+  // Send a request to the server.
   const response = await fetch('/user/', request);
   const serverResponse = await response.json();
-  
-  //if login is successful
-  setLogin(true);
+
+  // If successful new user.
+  if (serverResponse === 'Success') {
+    // "Log in" to the database.
+    setLogin(true);
+  } else {
+    setLogin(false);
+  }
+  // Reset state values after login.
+  setLoginState(
+    {...loginState,
+      loginEmail: '',
+      loginPassword: ''
+    }
+  );
+
   }
 
 
