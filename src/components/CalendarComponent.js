@@ -60,6 +60,9 @@ export default function CalendarComponent() {
     setModal(true);
   };
 
+  const [calendarEvents, setCalendarEvents] = useState([
+    { title: 'Interview', date: '2021-01-12'}
+  ]);
 
   return (
     <InterviewStateContext.Provider value={InterviewStateValues}>
@@ -75,8 +78,9 @@ export default function CalendarComponent() {
           plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
           initialView="dayGridMonth"
           weekends={true}
-          selectable={true}
-          editable={true}
+          selectable={false}
+          editable={false}
+          events={calendarEvents}
         />
       </div>
     </InterviewStateContext.Provider>

@@ -14,6 +14,9 @@ export default function App() {
   // Importing Light and Dark mode for application.
   const { colorMode, toggleColorMode } = useColorMode();
 
+  // Who is the current user?
+  const [ currentUser, setCurrentUser ] = useState('');
+
   // If the user is authenticated, render the Home.js component.
   // Otherwise, we need to render the Register.js component to allow them to register/sign in.
   const [loggedIn, setLogin] = useState(false);
@@ -24,6 +27,8 @@ export default function App() {
     toggleColorMode,
     loggedIn,
     setLogin,
+    currentUser,
+    setCurrentUser
   };
 
   return (
