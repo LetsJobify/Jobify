@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const interviewController = require('../controllers/interviewController')
+const interviewController = require('../controllers/interviewController.js');
 
 // get all interviews for user id within time range (expect time range in body)
 router.get('/all/user/:id', interviewController.getInterviewsForUser, (req,res)=> res.status(200).json(res.locals.interview));
