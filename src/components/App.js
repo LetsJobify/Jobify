@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import { useColorMode } from '@chakra-ui/react';
 
 // Import the necessary components to display inside of React-Router Switch logic.
 import Nav from './Nav';
 import Home from './Home';
 import Register from './Register';
+import Aggregate from './Aggregate';
+import Bulletin from './bulletinBoard'
 
 // Define a global state solution.
 export const GlobalStateContext = React.createContext();
@@ -16,10 +18,14 @@ export default function App() {
 
   // Who is the current user?
   const [ currentUser, setCurrentUser ] = useState('');
+  const [ currentUserId, setCurrentUserId ] = useState('');
 
   // If the user is authenticated, render the Home.js component.
   // Otherwise, we need to render the Register.js component to allow them to register/sign in.
   const [loggedIn, setLogin] = useState(false);
+
+  // Because React Router is not fucking working, fuck it, we'll do it live.
+  const [ currentPage, setCurrentPage ] = useState('Home');
 
   // Define the values that will go into the Global State Context.
   const GlobalStateValue = {
@@ -28,28 +34,68 @@ export default function App() {
     loggedIn,
     setLogin,
     currentUser,
-    setCurrentUser
+    setCurrentUser,
+    currentUserId,
+    setCurrentUserId,
+    currentPage,
+    setCurrentPage
   };
+
+
 
   return (
     <GlobalStateContext.Provider value={GlobalStateValue}>
-      <div>
-        <Nav />
-        <Router>
-          <Switch>
-            {/* Login/Register OR Home */}
-            {loggedIn ? (
-              <Route exact path="/" component={Home} />
-            ) : (
-              <Route exact path="/" component={Register} />
-            )}
-
-            {/* <Route exact path="/Bulletin" component={Bulletin} />
-            <Route exact path="/Data" component={Data} />
-            <Route exact path="/Fun" component={Fun} /> */}
-          </Switch>
-        </Router>
-      </div>
+      {loggedIn ? (
+        <>
+          {currentPage === 'Home' && (
+            <>
+              <Nav />
+              <Home />
+            </>
+          )}
+          {currentPage === 'Aggregate' && (
+            <>
+              <Nav />
+              <Aggregate />
+            </>
+          )}
+          {currentPage === 'Bulletin' && (
+            <>
+              <Nav />
+              <Bulletin />
+            </>
+          )}
+        </>
+      ) : (
+        <>
+          {currentPage === 'Home' && (
+            <>
+              <Nav />
+              <Register />
+            </>
+          )}
+        </>
+      )}
     </GlobalStateContext.Provider>
   );
+
+//   <div>
+//   <Router>
+//     <Nav />
+//     <Switch>
+//     {/* Login/Register OR Home */}
+    
+//     {loggedIn && (
+//       <div>
+//         <Route path="/" component={Home} />
+//         <Route path="/Aggregate" component={Aggregate} />
+//         <Route path="/Bulletin" component={Bulletin} />
+//       </div>
+//     )}
+//     {!loggedIn && <Route path="/" component={Register} /> }
+
+//     {/* <Route exact path="/Fun" component={Fun} /> */}
+//     </Switch>
+//   </Router>
+// </div>
 }

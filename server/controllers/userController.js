@@ -82,7 +82,7 @@ userController.verifyUser = (req, res, next) => {
     .then((data) => {
       console.log('this is the data from the user ', data.rows);
       if (data.rows[0].password === password) {
-        res.locals.userInfo = data.rows;
+        res.locals.userInfo = data.rows[0];
         res.locals.userInfo.success = true; 
       } else {
         res.locals.userInfo.success = false;

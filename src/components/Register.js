@@ -14,7 +14,7 @@ import { EmailIcon, UnlockIcon } from '@chakra-ui/icons';
 
 export default function Register() {
   // Importing color mode for day/night logic. setLogin defines if logged in. We need to know current user.
-  const { colorMode, setLogin, currentUser, setCurrentUser } = useContext(GlobalStateContext);
+  const { colorMode, setLogin, currentUser, setCurrentUser, currentUserId, setCurrentUserId } = useContext(GlobalStateContext);
 
   // Set up "loading" state.
   const [isLoading, setIsLoading] = useState(false);
@@ -67,10 +67,11 @@ export default function Register() {
     const serverResponse = await response.json();
 
     // If successful new user.
-    if (serverResponse === 'Success') {
+    if (serverResponse.success === true) {
       // "Log in" to the database.
       setLogin(true);
       setCurrentUser(registerState.registerEmail);
+      setCurrentUserId(serverResponse.id);
     } else {
       setLogin(false);
     }
@@ -104,11 +105,12 @@ export default function Register() {
     // Send a request to the server.
     const response = await fetch('/user/login', request);
     const serverResponse = await response.json();
-
+    console.log(serverResponse);
     // If successful new user.
-    if (serverResponse === 'Success') {
+    if (serverResponse.success === true) {
       // "Log in" to the database.
       setCurrentUser(loginState.loginEmail);
+      setCurrentUserId(serverResponse.id);
       setLogin(true);
     } else {
       setLogin(false);

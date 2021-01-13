@@ -74,6 +74,10 @@ export default function Aggregate() {
   // };
 
   return (
+    <div>
+    <div>
+      what the fuck
+    </div>
     <div className="companies">
       <DataTable
         Clicked
@@ -81,6 +85,7 @@ export default function Aggregate() {
         columns={[columns]}
         data={[data]}
       />
+    </div>
     </div>
   );
 }

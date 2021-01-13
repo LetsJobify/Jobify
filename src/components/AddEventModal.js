@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { InterviewStateContext } from './CalendarComponent';
+import { GlobalStateContext } from './App';
 import { Modal, Button } from 'react-bootstrap';
 import Interview from './Interview'
 
@@ -20,6 +21,7 @@ export default function AddEventModal(props) {
     setValue
    } = useContext(InterviewStateContext);
 
+   const { currentUser, currentUserId } = useContext(GlobalStateContext);
   return (
     <Modal
       {...props}
@@ -29,7 +31,37 @@ export default function AddEventModal(props) {
       className='modal-background'
     >
       <Interview />
-      <Button variant="success" onClick={onHide}>
+      <Button variant="success" onClick={ async () => {
+        onHide();
+
+        // Send a post request
+        const request = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: currentUserId,
+            company_id: formState.company,
+            date: formState.date,
+            rating: formState.rating,
+            type: formState.type,
+            interviewer: formState.interviewer,
+            address: formState.address,
+            offer: formState.offer,
+            pre_notes: formState.notes,
+            feedback: formState.feedback,
+            improve: formState.feedback,
+            questions: formState.faq,
+            accepted: formState.accepted,
+          })
+        };
+
+        const response = await fetch('/interview', request);
+        const serverResponse = await response.json();
+        console.log(serverResponse);
+
+      }}>
         Submit
       </Button>
     </Modal>

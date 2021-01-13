@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { GlobalStateContext } from './App';
 import { InterviewStateContext } from './CalendarComponent';
 
@@ -25,6 +25,26 @@ import {
 } from '@chakra-ui/react';
 
 export default function Interview() {
+
+  const [ options, setOptions ] = useState([]);
+
+  useEffect( async () => {
+    const request = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    };
+    const response = await fetch('/company', request);
+    const serverResponse = await response.json();
+    const comps = [];
+
+    serverResponse.forEach(company => {
+      comps.push({id: company.__id, name: company.name})
+    });
+    setOptions(comps);
+
+  }, [])
 
   // Used for background colors.
   const { colorMode } = useContext(GlobalStateContext);
@@ -66,16 +86,16 @@ export default function Interview() {
             placeholder="Select"
             onChange={(e) => setFormState({...formState, company: e.target.value })}
           >
-            <option value="Google">Google</option>
-            <option value="Amazon">Amazon</option>
-            <option value="Facebook">Facebook</option>
-            <option value="Netflix">Netflix</option>
+            {options.map(el => {
+              return <option key={el.id} value={el.id}>{el.name}</option>
+            })}
           </Select>
         </span>
         <span>
           <Text mb="1">Date</Text>
           <Input 
           w="16vw" 
+          placeholder="yyyy-mm-dd"
           onChange={(e) => setFormState({...formState, date: e.target.value })}
           />
         </span>

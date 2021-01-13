@@ -16,11 +16,10 @@ import {
   MoonIcon,
   SunIcon,
 } from '@chakra-ui/icons';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 export default function Nav() {
 
-  const { colorMode, toggleColorMode, loggedIn, setLogin, currentUser, setCurrentUser } = useContext(GlobalStateContext);
+  const { colorMode, toggleColorMode, loggedIn, setLogin, currentUser, setCurrentUser, currentUserId, setCurrentUserId, setCurrentPage } = useContext(GlobalStateContext);
 
   return (
     <div>
@@ -33,6 +32,7 @@ export default function Nav() {
         <Button onClick={toggleColorMode} className="" ml="2" mr="2" mt="2">
           {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
         </Button>
+        
         }
 
         {loggedIn ? 
@@ -51,37 +51,35 @@ export default function Nav() {
                 onClick={() => {
                   setLogin(false);
                   setCurrentUser('');
+                  setCurrentUserId('');
+                  setCurrentPage('Home')
                 }}
               >
                 Sign Out
               </MenuItem>
             </MenuList>
           </Menu>
-          <Router>
-            <Link to="/">
-              <Button mt="2" mr="2">
-                <CalendarIcon />
-              </Button>
-            </Link>
-
-            <Link to="/Bulletin">
-              <Button mt="2" mr="2">
-                <ChatIcon />
-              </Button>
-            </Link>
-
-            <Link to="/Data">
-              <Button mt="2" mr="2">
-                Data
-              </Button>
-            </Link>
-
-            <Link to="/Fun">
-              <Button mt="2" mr="2">
-                Fun
-              </Button>
-            </Link>
-          </Router>
+          <Button 
+            mt="2" 
+            mr="2"
+            onClick={() => setCurrentPage('Home')}
+          >
+            <CalendarIcon />
+          </Button>
+          <Button 
+            mt="2" 
+            mr="2"
+            onClick={() => setCurrentPage('Bulletin')}
+          >
+            <ChatIcon />
+          </Button>
+          <Button 
+            mt="2" 
+            mr="2"
+            onClick={() => setCurrentPage('Aggregate')}
+          >
+            Aggregate
+          </Button>
           <Box mr="3" mt="4">
             Signed in as: {currentUser}.
           </Box>

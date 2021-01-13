@@ -48,7 +48,7 @@ export default function CalendarComponent() {
     format,
     parse,
     value,
-    setValue
+    setValue,
   };
 
   // Modal Functionality

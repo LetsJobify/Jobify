@@ -14,7 +14,12 @@ const app = express();
 
 // Connecting mongoose to mongodb
 const mongoURI = 'mongodb+srv://jobify:jobify@cluster0.thnpe.mongodb.net/Messages?retryWrites=true&w=majority';
-mongoose.connect(mongoURI, { useUnifiedTopology: true });
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false
+});
 
 // Parse body
 app.use(express.json());
