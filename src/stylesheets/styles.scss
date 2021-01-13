@@ -16,11 +16,6 @@
   margin-top: 5vh;
 }
 
-.__interview--page {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-}
-
 // Not necessary to keep this.
 .calendar {
   width: 100%;
@@ -60,4 +55,8 @@
 .gap {
   margin-right: 0.5vw;
   margin-left: 0.5vw;
+}
+
+.modal-background .modal-content {
+  background: #0a1626;
 }

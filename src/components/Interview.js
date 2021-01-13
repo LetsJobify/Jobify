@@ -23,7 +23,7 @@ import {
   Textarea
 } from '@chakra-ui/react';
 
-export default function Interview() {
+export default function Interview(props) {
 
   // Used for background colors.
   const { colorMode } = useContext(GlobalStateContext);
@@ -32,7 +32,7 @@ export default function Interview() {
   const [ sliderValue, setSliderValue ] = useState(0);
   const handleSliderChange = (sliderValue) => setSliderValue(sliderValue);
 
-  // Show or hide the interview form.
+  // Show or hide the post interview form.
   const [ formVisibility, setFormVisibility ] = useState(false);
 
   // Interview form object state.
@@ -51,69 +51,67 @@ export default function Interview() {
   });
 
   return (
-    <div>
-      { formVisibility ? 
-      <Container 
-        bg={`${colorMode}.500`}
-        maxW="38vw"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        pt="4"
-        pr="4"
-        pb="4"
-        pl="4"
-        mt="6"
-      >
-        <Center>
-          <Button
+    <Container 
+      bg={`${colorMode}.500`}
+      maxW="38vw"
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      pt="4"
+      pr="4"
+      pb="4"
+      pl="4"
+      mt="6"
+      mb="6"
+    >
+      <div className='two_items'>
+        <span>
+          <Text mb="1">Company</Text>
+          <Select w="16vw">
+            <option value="google">Google</option>
+            <option value="google">Amazon</option>
+            <option value="google">Facebook</option>
+            <option value="google">Netflix</option>
+          </Select>
+        </span>
+        <span>
+          <Text mb="1">Date</Text>
+          <Input w="16vw" />
+        </span>
+      </div>
+      <div className='one_item'>
+        <span>
+          <Text mt="4">Company Address</Text>
+          <Input 
+            variant="flushed"
+            size="lg"
+            w="30vw"
+          />
+        </span>
+      </div>
+      <div className='one_item'>
+        <span>
+          <Text mt="3">Notes</Text>
+          <Textarea 
+            mt="1"
+            placeholder="Things to brush up on / goals / notes..."
+            resize="none"
+            w="30vw"
+            h="12vh"
+          />
+        </span>
+      </div>
+      {formVisibility ? (
+      <div>
+        <div className='one_item'>
+          <Button 
+            mt="2" 
+            mb="2"
             onClick={() => setFormVisibility(!formVisibility)}
-            w="38vw"
             size="xs"
-            mb="4"
+            w="30vw"
           >
-            Hide
-          </Button>
-        </Center>
-        <div className='two_items'>
-          <span>
-            <Text mb="1">Company</Text>
-            <Select w="16vw">
-              <option value="google">Google</option>
-              <option value="google">Amazon</option>
-              <option value="google">Facebook</option>
-              <option value="google">Netflix</option>
-            </Select>
-          </span>
-          <span>
-            <Text mb="1">Date</Text>
-            <Input w="16vw" />
-          </span>
-        </div>
-        <div className='one_item'>
-          <span>
-            <Text mt="4">Company Address</Text>
-            <Input 
-              variant="flushed"
-              size="lg"
-              w="30vw"
-            />
-          </span>
-        </div>
-        <div className='one_item'>
-          <span>
-            <Text mt="3">Notes</Text>
-            <Textarea 
-              mt="1"
-              placeholder="Things to brush up on / goals / notes..."
-              resize="none"
-              w="30vw"
-              h="12vh"
-            />
-          </span>
-        </div>
-        <div className='one_item'>
-          <Text mt="2" mb="2">Post Interview</Text>
+            Hide Post Interview</Button>
         </div>
         <div className='one_item'>
           <span>
@@ -199,39 +197,19 @@ export default function Interview() {
             <Text mt="2" mb="5">Fool me once, shame on... shame on you. Fool me—you can't get fooled again.</Text>
           </span>
         </div>
-        <div className='two_buttons'>
-          <Button colorScheme="red">
-            Delete
-          </Button>
-          <Button colorScheme="green">
-            Save/Confirm
-          </Button>
-        </div>
-      </Container>
-      :
-      <Container
-        bg={`${colorMode}.500`}
-        maxW="38vw"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        pt="4"
-        pr="4"
-        pb="4"
-        pl="4"
-        mt="6"
-      >
-        <Center>
-          <Button
-            onClick={() => setFormVisibility(!formVisibility)}
-            w="38vw"
-            size="xs"
-          >
-            Show Interview Form
-          </Button>
-        </Center>
-      </Container>
-      }
-    </div>
+      </div>
+      ) : (
+      <div className='one_item'>
+        <Button 
+          mt="2" 
+          mb="2"
+          onClick={() => setFormVisibility(!formVisibility)}
+          size="xs"
+          w="30vw"
+        >
+          Show Post Interview</Button>
+      </div>
+      )}
+    </Container>
   )
 }
