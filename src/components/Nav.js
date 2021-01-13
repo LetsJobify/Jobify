@@ -20,7 +20,7 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 export default function Nav() {
 
-  const { colorMode, toggleColorMode, loggedIn, setLogin } = useContext(GlobalStateContext);
+  const { colorMode, toggleColorMode, loggedIn, setLogin, currentUser, setCurrentUser } = useContext(GlobalStateContext);
 
   return (
     <div>
@@ -48,13 +48,15 @@ export default function Nav() {
             </MenuButton>
             <MenuList>
               <MenuItem 
-                onClick={() => setLogin(false)}
+                onClick={() => {
+                  setLogin(false);
+                  setCurrentUser('');
+                }}
               >
                 Sign Out
               </MenuItem>
             </MenuList>
           </Menu>
-
           <Router>
             <Link to="/">
               <Button mt="2" mr="2">
@@ -80,6 +82,9 @@ export default function Nav() {
               </Button>
             </Link>
           </Router>
+          <Box mr="3" mt="4">
+            Signed in as: {currentUser}.
+          </Box>
         </div>
         : 
         <span></span>

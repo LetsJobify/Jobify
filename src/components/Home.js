@@ -1,18 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { GlobalStateContext } from './App';
 import {
-  Box,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbSeparator,
-  Button,
-  Container,
   Center,
   Divider,
 } from '@chakra-ui/react';
 import CalendarComponent from './CalendarComponent';
-import Interview from './Interview';
 
 export default function Home() {
   // Choose between the interview and calendar crumbs.
@@ -28,46 +23,25 @@ export default function Home() {
     <div>
       <Breadcrumb ml="5" mt="2" mb="2">
         <BreadcrumbItem>
-          <BreadcrumbLink onClick={() => handleCrumb('Interview')}>
-            Interviews
+          <BreadcrumbLink onClick={() => handleCrumb('Company')}>
+            Company
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <BreadcrumbLink onClick={() => handleCrumb('Calendar')}>
-            Calendar
+          <BreadcrumbLink onClick={() => handleCrumb('Upcoming Appointments')}>
+            Upcoming Appointments
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <Divider />
-      {currentCrumb === 'Interview' && 
-        <div className='__interview--page'>
-          <Interview />
-          <Container
-            bg={`${colorMode}.500`}
-            maxW="18vw"
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            pt="4"
-            pr="4"
-            pb="4"
-            pl="4"
-            mt="6"
-            mr="6"
-          >
-            <Center mb="2">Company</Center>
-            <Divider />
-            <Box>Google</Box>
-            <Box>Amazon</Box>
-            <Box>Facebook</Box>
-            <Box>Netflix</Box>
-          </Container>
-        </div>
-      }
-      {currentCrumb === 'Calendar' && (
-        <Center mt="5" ml="5" mr="5" mb="5">
-          <CalendarComponent />
-        </Center>
+      <Center mt="5" ml="5" mr="5" mb="5">
+        <CalendarComponent />
+      </Center>
+      {currentCrumb === 'Company' && (
+        <div>Company</div>
+      )}
+      {currentCrumb === 'Upcoming Appointments' && (
+        <div>Upcoming Appointments</div>
       )}
     </div>
   );

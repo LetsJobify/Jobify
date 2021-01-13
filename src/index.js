@@ -7,11 +7,11 @@ import './stylesheets/styles.scss';
 // Set color theme throughout application.
 const colors = {
   light: {
-    100: '#EDF5FA',
-    200: '#D8E5EE',
-    300: '#C3D5E1',
-    400: '#ADC5D5',
-    500: '#154B6F',
+    100: '#f4f4f2',
+    200: '#e8e8e8',
+    300: '#EDF5FA',
+    400: '#D8E5EE',
+    500: '#bbbfca',
   },
   dark: {
     100: '#527296',

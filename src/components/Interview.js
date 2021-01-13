@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { GlobalStateContext } from './App';
+import { InterviewStateContext } from './CalendarComponent';
 
 import {
   Box,
@@ -27,93 +28,93 @@ export default function Interview() {
 
   // Used for background colors.
   const { colorMode } = useContext(GlobalStateContext);
+  // Import form state defined in Calendar component. (This state needed to be defined upstream because of the submit button inside of the addEventModal)
+  const { 
+    formState,
+    setFormState,
+    sliderValue,
+    setSliderValue,
+    handleSliderChange,
+    format,
+    parse,
+    value,
+    setValue
+   } = useContext(InterviewStateContext);
 
-  // Slider in the interview form.
-  const [ sliderValue, setSliderValue ] = useState(0);
-  const handleSliderChange = (sliderValue) => setSliderValue(sliderValue);
-
-  // Show or hide the interview form.
+  // Show or hide the post interview form.
   const [ formVisibility, setFormVisibility ] = useState(false);
 
-  // Interview form object state.
-  const [ formState, setFormState ] = useState({
-    company: '',
-    date: '',
-    address: '',
-    notes: '',
-    feedback: '',
-    type: '',
-    rating: 0,
-    interviewer: '',
-    faq: '',
-    offer: 0,
-    accepted: ''
-  });
-
   return (
-    <div>
-      { formVisibility ? 
-      <Container 
-        bg={`${colorMode}.500`}
-        maxW="38vw"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        pt="4"
-        pr="4"
-        pb="4"
-        pl="4"
-        mt="6"
-      >
-        <Center>
-          <Button
-            onClick={() => setFormVisibility(!formVisibility)}
-            w="38vw"
-            size="xs"
-            mb="4"
+    <Container 
+      bg={`${colorMode}.500`}
+      maxW="38vw"
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      pt="4"
+      pr="4"
+      pb="4"
+      pl="4"
+      mt="6"
+      mb="6"
+    >
+      <div className='two_items'>
+        <span>
+          <Text mb="1">Company</Text>
+          <Select 
+            w="16vw"
+            placeholder="Select"
+            onChange={(e) => setFormState({...formState, company: e.target.value })}
           >
-            Hide
-          </Button>
-        </Center>
-        <div className='two_items'>
-          <span>
-            <Text mb="1">Company</Text>
-            <Select w="16vw">
-              <option value="google">Google</option>
-              <option value="google">Amazon</option>
-              <option value="google">Facebook</option>
-              <option value="google">Netflix</option>
-            </Select>
-          </span>
-          <span>
-            <Text mb="1">Date</Text>
-            <Input w="16vw" />
-          </span>
-        </div>
+            <option value="Google">Google</option>
+            <option value="Amazon">Amazon</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Netflix">Netflix</option>
+          </Select>
+        </span>
+        <span>
+          <Text mb="1">Date</Text>
+          <Input 
+          w="16vw" 
+          onChange={(e) => setFormState({...formState, date: e.target.value })}
+          />
+        </span>
+      </div>
+      <div className='one_item'>
+        <span>
+          <Text mt="4">Company Address</Text>
+          <Input 
+            variant="flushed"
+            size="lg"
+            w="30vw"
+            onChange={(e) => setFormState({...formState, address: e.target.value })}
+          />
+        </span>
+      </div>
+      <div className='one_item'>
+        <span>
+          <Text mt="3">Notes</Text>
+          <Textarea 
+            mt="1"
+            placeholder="Things to brush up on / goals / notes..."
+            resize="none"
+            w="30vw"
+            h="12vh"
+            onChange={(e) => setFormState({...formState, notes: e.target.value })}
+          />
+        </span>
+      </div>
+      {formVisibility ? (
+      <div>
         <div className='one_item'>
-          <span>
-            <Text mt="4">Company Address</Text>
-            <Input 
-              variant="flushed"
-              size="lg"
-              w="30vw"
-            />
-          </span>
-        </div>
-        <div className='one_item'>
-          <span>
-            <Text mt="3">Notes</Text>
-            <Textarea 
-              mt="1"
-              placeholder="Things to brush up on / goals / notes..."
-              resize="none"
-              w="30vw"
-              h="12vh"
-            />
-          </span>
-        </div>
-        <div className='one_item'>
-          <Text mt="2" mb="2">Post Interview</Text>
+          <Button 
+            mt="2" 
+            mb="2"
+            onClick={() => setFormVisibility(!formVisibility)}
+            size="xs"
+            w="30vw"
+          >
+            Hide Post Interview</Button>
         </div>
         <div className='one_item'>
           <span>
@@ -125,15 +126,20 @@ export default function Interview() {
               resize="none"
               w="30vw"
               h="6vh"
+              onChange={(e) => setFormState({...formState, feedback: e.target.value })}
             />
           </span>
         </div>
         <div className='three_items'>
           <span>
             <Text mb="1">Type</Text>
-            <Select w="8vw">
-              <option value="behavioral">Behavioral</option>
-              <option value="technical">Technical</option>
+            <Select 
+              w="8vw"
+              placeholder="Select"
+              onChange={(e) => setFormState({...formState, type: e.target.value })}
+            >
+              <option value="Behavioral">Behavioral</option>
+              <option value="Technical">Technical</option>
             </Select>
           </span>
           <span>
@@ -159,6 +165,7 @@ export default function Interview() {
             <Input 
               size="lg"
               w="12vw"
+              onChange={(e) => setFormState({...formState, interviewer: e.target.value })}
             />
           </span>
         </div>
@@ -172,13 +179,22 @@ export default function Interview() {
               resize="none"
               w="30vw"
               h="6vh"
+              onChange={(e) => setFormState({...formState, faq: e.target.value })}
             />
           </span>
         </div>
         <div className='two_items'>
           <span>
             <Text mb="1">Offer Amount</Text>
-            <NumberInput allowMouseWheel w="16vh" defaultValue={80000} min={0}>
+            <NumberInput 
+              w="16vh" 
+              onChange={(valueString) => {
+                setValue(parse(valueString))
+                setFormState({...formState, offer: parse(valueString) })
+              }}
+              value={format(value)}
+              min={0}
+            >
               <NumberInputField />
               <NumberInputStepper>
                 <NumberIncrementStepper />
@@ -188,7 +204,11 @@ export default function Interview() {
           </span>
           <span>
             <Text mb="1">Accepted Offer?</Text>
-            <Select w="16vw">
+            <Select 
+              w="16vw"
+              placeholder="Select"
+              onChange={(e) => setFormState({...formState, accepted: e.target.value })}
+            >
               <option value="no">No</option>
               <option value="yes">Yes</option>
             </Select>
@@ -199,39 +219,19 @@ export default function Interview() {
             <Text mt="2" mb="5">Fool me once, shame on... shame on you. Fool me—you can't get fooled again.</Text>
           </span>
         </div>
-        <div className='two_buttons'>
-          <Button colorScheme="red">
-            Delete
-          </Button>
-          <Button colorScheme="green">
-            Save/Confirm
-          </Button>
-        </div>
-      </Container>
-      :
-      <Container
-        bg={`${colorMode}.500`}
-        maxW="38vw"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        pt="4"
-        pr="4"
-        pb="4"
-        pl="4"
-        mt="6"
-      >
-        <Center>
-          <Button
-            onClick={() => setFormVisibility(!formVisibility)}
-            w="38vw"
-            size="xs"
-          >
-            Show Interview Form
-          </Button>
-        </Center>
-      </Container>
-      }
-    </div>
+      </div>
+      ) : (
+      <div className='one_item'>
+        <Button 
+          mt="2" 
+          mb="2"
+          onClick={() => setFormVisibility(!formVisibility)}
+          size="xs"
+          w="30vw"
+        >
+          Show Post Interview</Button>
+      </div>
+      )}
+    </Container>
   )
 }
