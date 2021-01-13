@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { GlobalStateContext } from './App';
 import {
   Box,
   Breadcrumb,
@@ -6,6 +7,7 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
   Button,
+  Container,
   Center,
   Divider,
 } from '@chakra-ui/react';
@@ -18,6 +20,9 @@ export default function Home() {
   const handleCrumb = (event) => {
     setCurrentCrumb(event);
   };
+
+  // Used for background colors.
+  const { colorMode } = useContext(GlobalStateContext);
 
   return (
     <div>
@@ -34,7 +39,27 @@ export default function Home() {
         </BreadcrumbItem>
       </Breadcrumb>
       <Divider />
-      {currentCrumb === 'Interview' && <Interview /> }
+      {currentCrumb === 'Interview' && 
+        <div className='__interview--page'>
+          <Interview />
+          <Container
+            bg={`${colorMode}.500`}
+            maxW="18vw"
+            borderWidth="1px"
+            borderRadius="lg"
+            overflow="hidden"
+            pt="4"
+            pr="4"
+            pb="4"
+            pl="4"
+            mt="6"
+            mr="6"
+          >
+            <Center mb="2">Company</Center>
+            <Divider />
+          </Container>
+        </div>
+      }
       {currentCrumb === 'Calendar' && (
         <Center mt="5" ml="5" mr="5" mb="5">
           <CalendarComponent />
