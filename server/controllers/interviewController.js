@@ -239,4 +239,26 @@ interviewController.getOutcomes = (req, res, next) => {
       });
   };
 
+// get all interview aggregate data
+interviewController.aggregate = (req, res, next) => {
+
+  const interviewQuery = `SELECT i.__id as "iid",* FROM "interview" i LEFT OUTER JOIN "user" u ON "u".__id = "i".user_id LEFT OUTER JOIN "company" c ON "i".company_id = "c".__id`; 
+
+  db.query(interviewQuery)
+    .then((data) => {
+      res.locals.interview = data.rows[0];
+      console.log('this is outcome data ', data.rows);
+      next();
+    })
+    .catch(() => {
+      next({
+        log: `interviewController.aggregate: ERROR: Error getting the aggregate information from the database.`,
+        message: {
+          err:
+            'Error occurred in interviewController.aggregate. Check server logs for more details.',
+        },
+      });
+    });
+};
+
 module.exports = interviewController;

@@ -12,7 +12,7 @@ router.get('/all/company/:id', interviewController.getInterviewsForCompany, (req
 router.get('/all/accepted/', interviewController.getOutcomes, (req,res)=> res.status(200).json(res.locals.interview));
 
 // get all interviews based on aggregate query
-router.get('all/aggregate/', (req,res)=> res.status(200).json(res.locals.interview));
+router.get('all/aggregate/', interviewController.aggregate, (req,res)=> res.status(200).json(res.locals.interview));
 
 // interview form - single interview
 router.get('/:id', interviewController.getInterview, (req,res)=> res.status(200).json(res.locals.interview));
