@@ -57,6 +57,10 @@ export default function Home() {
           >
             <Center mb="2">Company</Center>
             <Divider />
+            <Box>Google</Box>
+            <Box>Amazon</Box>
+            <Box>Facebook</Box>
+            <Box>Netflix</Box>
           </Container>
         </div>
       }

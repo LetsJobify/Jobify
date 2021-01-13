@@ -50,6 +50,9 @@ export default function Interview() {
           <Text mb="1">Company</Text>
           <Select w="16vw">
             <option value="google">Google</option>
+            <option value="google">Amazon</option>
+            <option value="google">Facebook</option>
+            <option value="google">Netflix</option>
           </Select>
         </span>
         <span>
