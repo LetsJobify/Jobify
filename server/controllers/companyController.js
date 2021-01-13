@@ -28,7 +28,7 @@ companyController.getCompany = (req, res, next) => {
       console.log(err);
       return next({ log: 'Error getting company info' });
     }
-    res.locals.company = result.rows[0];
+    res.locals.company = result.rowCount ? result.rows[0] : null;
     return next();
   });
 };
@@ -39,14 +39,15 @@ companyController.createCompany = (req, res, next) => {
     name, address, phone, logo, size,
   } = req.body;
 
-  const query = `INSERT INTO company (name, address, phone, logo, size) VALUES ($1, $2, $3, $4, $5)`;
+  const query = `INSERT INTO company (name, address, phone, logo, size) VALUES ($1, $2, $3, $4, $5)
+                    RETURNING __id, name, address, phone, logo, size;`;
   const inputs = [name, address, phone, logo, size];
 
   db.query(query, inputs, (err, result) => {
     if (err) {
       return next({ log: 'Error creating company info' });
     }
-    res.locals.company = result.rowCount;
+    res.locals.company = result.rowCount ? result.rows[0] : 0;
     return next();
   });
 };
@@ -58,16 +59,15 @@ companyController.updateCompany = (req, res, next) => {
     name, address, phone, logo, size,
   } = req.body;
 
-  const query = `UPDATE company SET name=($2), address=($3), phone=($4), logo=($5), size=($6) WHERE 1=1 AND __id=($1)`;
+  const query = `UPDATE company SET name=($2), address=($3), phone=($4), logo=($5), size=($6) WHERE 1=1 AND __id=($1)
+                    RETURNING __id, name, address, phone, logo, size;`;
   const inputs = [id, name, address, phone, logo, size];
 
   db.query(query, inputs, (err, result) => {
     if (err) {
-      console.log(err);
       return next({ log: 'Error updating company info' });
     }
-    console.log(result);
-    res.locals.company = result.rowCount;
+    res.locals.company = result.rowCount ? result.rows[0] : 0;
     return next();
   });
 };
