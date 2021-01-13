@@ -3,6 +3,7 @@ const path = require('path');
 const interviewRouter = require('./routes/interview');
 const userRouter = require('./routes/user');
 const companyRouter = require('./routes/company');
+const messageRouter = require('./routes/message');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
@@ -12,8 +13,8 @@ const PORT = 3000;
 const app = express();
 
 // Connecting mongoose to mongodb
-const mongoURI = 'mongodb://localhost/unit11dev';
-mongoose.connect(mongoURI);
+const mongoURI = 'mongodb+srv://jobify:jobify@cluster0.thnpe.mongodb.net/Messages?retryWrites=true&w=majority';
+mongoose.connect(mongoURI, { useUnifiedTopology: true });
 
 // Parse body
 app.use(express.json());
