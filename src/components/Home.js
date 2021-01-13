@@ -10,6 +10,7 @@ import {
   Divider,
 } from '@chakra-ui/react';
 import CalendarComponent from './CalendarComponent';
+import Interview from './Interview';
 
 export default function Home() {
   // Choose between the interview and calendar crumbs.
@@ -33,11 +34,7 @@ export default function Home() {
         </BreadcrumbItem>
       </Breadcrumb>
       <Divider />
-      {currentCrumb === 'Interview' && (
-        <div>
-          <Button>Interview</Button>
-        </div>
-      )}
+      {currentCrumb === 'Interview' && <Interview /> }
       {currentCrumb === 'Calendar' && (
         <Center mt="5" ml="5" mr="5" mb="5">
           <CalendarComponent />
