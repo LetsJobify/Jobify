@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { GlobalStateContext } from './App';
+import { InterviewStateContext } from './CalendarComponent';
 
 import {
   Box,
@@ -23,32 +24,25 @@ import {
   Textarea
 } from '@chakra-ui/react';
 
-export default function Interview(props) {
+export default function Interview() {
 
   // Used for background colors.
   const { colorMode } = useContext(GlobalStateContext);
-
-  // Slider in the interview form.
-  const [ sliderValue, setSliderValue ] = useState(0);
-  const handleSliderChange = (sliderValue) => setSliderValue(sliderValue);
+  // Import form state defined in Calendar component. (This state needed to be defined upstream because of the submit button inside of the addEventModal)
+  const { 
+    formState,
+    setFormState,
+    sliderValue,
+    setSliderValue,
+    handleSliderChange,
+    format,
+    parse,
+    value,
+    setValue
+   } = useContext(InterviewStateContext);
 
   // Show or hide the post interview form.
   const [ formVisibility, setFormVisibility ] = useState(false);
-
-  // Interview form object state.
-  const [ formState, setFormState ] = useState({
-    company: '',
-    date: '',
-    address: '',
-    notes: '',
-    feedback: '',
-    type: '',
-    rating: 0,
-    interviewer: '',
-    faq: '',
-    offer: 0,
-    accepted: ''
-  });
 
   return (
     <Container 
@@ -67,16 +61,23 @@ export default function Interview(props) {
       <div className='two_items'>
         <span>
           <Text mb="1">Company</Text>
-          <Select w="16vw">
-            <option value="google">Google</option>
-            <option value="google">Amazon</option>
-            <option value="google">Facebook</option>
-            <option value="google">Netflix</option>
+          <Select 
+            w="16vw"
+            placeholder="Select"
+            onChange={(e) => setFormState({...formState, company: e.target.value })}
+          >
+            <option value="Google">Google</option>
+            <option value="Amazon">Amazon</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Netflix">Netflix</option>
           </Select>
         </span>
         <span>
           <Text mb="1">Date</Text>
-          <Input w="16vw" />
+          <Input 
+          w="16vw" 
+          onChange={(e) => setFormState({...formState, date: e.target.value })}
+          />
         </span>
       </div>
       <div className='one_item'>
@@ -86,6 +87,7 @@ export default function Interview(props) {
             variant="flushed"
             size="lg"
             w="30vw"
+            onChange={(e) => setFormState({...formState, address: e.target.value })}
           />
         </span>
       </div>
@@ -98,6 +100,7 @@ export default function Interview(props) {
             resize="none"
             w="30vw"
             h="12vh"
+            onChange={(e) => setFormState({...formState, notes: e.target.value })}
           />
         </span>
       </div>
@@ -123,15 +126,20 @@ export default function Interview(props) {
               resize="none"
               w="30vw"
               h="6vh"
+              onChange={(e) => setFormState({...formState, feedback: e.target.value })}
             />
           </span>
         </div>
         <div className='three_items'>
           <span>
             <Text mb="1">Type</Text>
-            <Select w="8vw">
-              <option value="behavioral">Behavioral</option>
-              <option value="technical">Technical</option>
+            <Select 
+              w="8vw"
+              placeholder="Select"
+              onChange={(e) => setFormState({...formState, type: e.target.value })}
+            >
+              <option value="Behavioral">Behavioral</option>
+              <option value="Technical">Technical</option>
             </Select>
           </span>
           <span>
@@ -157,6 +165,7 @@ export default function Interview(props) {
             <Input 
               size="lg"
               w="12vw"
+              onChange={(e) => setFormState({...formState, interviewer: e.target.value })}
             />
           </span>
         </div>
@@ -170,13 +179,22 @@ export default function Interview(props) {
               resize="none"
               w="30vw"
               h="6vh"
+              onChange={(e) => setFormState({...formState, faq: e.target.value })}
             />
           </span>
         </div>
         <div className='two_items'>
           <span>
             <Text mb="1">Offer Amount</Text>
-            <NumberInput allowMouseWheel w="16vh" defaultValue={80000} min={0}>
+            <NumberInput 
+              w="16vh" 
+              onChange={(valueString) => {
+                setValue(parse(valueString))
+                setFormState({...formState, offer: parse(valueString) })
+              }}
+              value={format(value)}
+              min={0}
+            >
               <NumberInputField />
               <NumberInputStepper>
                 <NumberIncrementStepper />
@@ -186,7 +204,11 @@ export default function Interview(props) {
           </span>
           <span>
             <Text mb="1">Accepted Offer?</Text>
-            <Select w="16vw">
+            <Select 
+              w="16vw"
+              placeholder="Select"
+              onChange={(e) => setFormState({...formState, accepted: e.target.value })}
+            >
               <option value="no">No</option>
               <option value="yes">Yes</option>
             </Select>
