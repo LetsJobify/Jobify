@@ -16,12 +16,44 @@
   margin-top: 5vh;
 }
 
+.__interview--page {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+// Not necessary to keep this.
 .calendar {
   width: 100%;
   height: 100%;
 }
 
-.MainDiv {
-  height: 100vh;
-  width: 100vw;
+.one_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.two_items {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.35vw;
+}
+
+.two_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.three_items {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1vw;
+}
+
+.gap {
+  margin-right: 0.5vw;
+  margin-left: 0.5vw;
 }
