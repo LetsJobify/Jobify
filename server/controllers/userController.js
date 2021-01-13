@@ -11,6 +11,7 @@ userController.getUser = (req, res, next) => {
   db.query(allUser, allUserValue)
     .then((data) => {
       res.locals.user = data.rows[0];
+      console.log('this is the data from the user ', data.rows);
       next();
     })
     .catch(() => {
@@ -24,6 +25,7 @@ userController.getUser = (req, res, next) => {
     });
 };
 
+// Update user information with information provided in the body
 userController.updateUser = (req, res, next) => {
   const { id } = req.query.id;
   const { email, password, avatar, first_name, last_name } = req.body;
@@ -33,6 +35,7 @@ userController.updateUser = (req, res, next) => {
   db.query(allUser, allUserValue)
     .then((data) => {
       res.locals.user = data.rows[0];
+      console.log('this is the data from the user ', data.rows);
       next();
     })
     .catch(() => {
@@ -46,6 +49,7 @@ userController.updateUser = (req, res, next) => {
     });
 };
 
+// delete giver user
 userController.deleteUser = (req, res, next) => {
   const { id } = req.query.id;
   const allUser = `DELETE FROM "user" WHERE __id=$1`;
@@ -78,10 +82,10 @@ userController.verifyUser = (req, res, next) => {
     .then((data) => {
       console.log('this is the data from the user ', data.rows);
       if (data.rows[0].password === password) {
-        res.locals.isVerified = true;
         res.locals.userInfo = data.rows;
+        res.locals.userInfo.success = true; 
       } else {
-        res.locals.isVerified = false;
+        res.locals.userInfo.success = false;
       }
       next();
     })
@@ -106,6 +110,7 @@ userController.createUser = (req, res, next) => {
     return res.status(500).send('You need to put in user and password! ');
   }
 
+
   const value = [
     String(email),
     String(password),
@@ -114,9 +119,13 @@ userController.createUser = (req, res, next) => {
     String(last_name),
   ];
 
-  const addUserQuery = `INSERT INTO "user" (email, password, avatar, first_name, last_name)
-  VALUES ($1, $2, $3, $4, $5)`;
+  const addUserQuery = `
+  INSERT INTO "user" (email, password, avatar, first_name, last_name)
+  VALUES ($1, $2, $3, $4, $5) 
+  RETURNING __id, first_name, last_name
+  `;
 
+  // Add the user to the database
   db.query(addUserQuery, value)
     .then((data) => {
       res.locals.newUser = data;
