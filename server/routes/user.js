@@ -4,7 +4,7 @@ const cookieController = require('../controllers/cookieController')
 const router = express.Router();
 
 // login user (expect email, password in body)
-router.post('/login', userController.verifyUser, cookieController.setCookie, (req,res)=> res.status(200).json(res.locals.user));
+router.post('/login', userController.verifyUser, cookieController.setCookie, (req,res)=> res.status(200).json('Success'));
 
 // user form - single user id (expect id in query param)
 router.get('/:id', userController.getUser, (req, res) => res.status(200).json(res.locals.user));
