@@ -5,10 +5,15 @@ const userRouter = require('./routes/user');
 const companyRouter = require('./routes/company');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const mongoose = require('mongoose');
 
 // Define server variables
 const PORT = 3000;
 const app = express();
+
+// Connecting mongoose to mongodb
+const mongoURI = 'mongodb://localhost/unit11dev';
+mongoose.connect(mongoURI);
 
 // Parse body
 app.use(express.json());
@@ -19,6 +24,7 @@ app.use(cookieParser());
 app.use('/interview', interviewRouter);
 app.use('/user', userRouter);
 app.use('/company', companyRouter);
+app.use('/messages', messageRouter);
 
 // Send index.html on startup
 app.get('/', (req, res) => {
