@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
 
-export default function AddDepModal(props) {
+export default function AddEventModal(props) {
   return (
     <Modal
       {...props}
@@ -11,7 +11,7 @@ export default function AddDepModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Add Department
+          Add to Schedule
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -22,6 +22,10 @@ export default function AddDepModal(props) {
               <input type="text" name="name" />
             </label>
             <input type="submit" value="Submit" />
+            <label>
+              Date:
+              <input type="text" id="start" name="date" />
+            </label>
           </form>
         </div>
       </Modal.Body>

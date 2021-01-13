@@ -3,8 +3,9 @@ import Calendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import AddDepModal from './AddDepModal';
+import AddEventModal from './AddEventModal';
 import { Button, ButtonToolbar } from 'react-bootstrap';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import listPlugin from '@fullcalendar/list';
@@ -23,7 +24,7 @@ export default function CalendarComponent() {
           Add Date
         </Button>
 
-        <AddDepModal show={showModal} onHide={addModalClose} />
+        <AddEventModal show={showModal} onHide={addModalClose} />
       </ButtonToolbar>
       <Calendar
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
