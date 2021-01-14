@@ -128,8 +128,10 @@ userController.createUser = (req, res, next) => {
   // Add the user to the database
   db.query(addUserQuery, value)
     .then((data) => {
-      res.locals.newUser = data;
+      res.locals.userInfo = data.rows[0];
+      res.locals.userInfo.success = true
       console.log('User added');
+      console.log(res.locals.userInfo);
       next();
     })
     .catch((err) =>

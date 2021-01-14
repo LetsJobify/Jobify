@@ -71,8 +71,10 @@ export default function Register() {
       // "Log in" to the database.
       setLogin(true);
       setCurrentUser(registerState.registerEmail);
+      console.log(serverResponse,' regstate ');
       setCurrentUserId(serverResponse.__id);
       console.log('Current user id is ', currentUserId)
+      setIsLoading(false);
     } else {
       setLogin(false);
     }
