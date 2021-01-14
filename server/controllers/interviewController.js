@@ -104,8 +104,8 @@ interviewController.updateInterview = (req, res, next) => {
     questions,
     accepted,
   } = req.body;
-
-  const interviewQuery = `UPDATE "interview" SET user_id = $1, company_id = $2, date= $3, rating= $4, type= $5, interviewer= $6, address= $7, offer= $8, pre_notes= $9, feedback= $10, improve= $11, questions= $12, accepted= $3 WHERE interview.__id = $14`;
+  
+  const interviewQuery = `UPDATE "interview" SET user_id = $1, company_id = $2, date= $3, rating= $4, type= $5, interviewer= $6, address= $7, offer= $8, pre_notes= $9, feedback= $10, improve= $11, questions= $12, accepted= $13 WHERE interview.__id = $14`;
   const interviewValue = [
     String(user_id),
     String(company_id),
@@ -123,6 +123,7 @@ interviewController.updateInterview = (req, res, next) => {
     id,
   ];
 
+  console.log('interview Vals  ',interviewValue )
   db.query(interviewQuery, interviewValue)
     .then((data) => {
       res.locals.interview = data.rows[0];
