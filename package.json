@@ -32,6 +32,7 @@
     "daypilot-pro-react": "https://npm.daypilot.org/daypilot-pro-react/trial/2021.1.4828.tar.gz",
     "express": "^4.17.1",
     "framer-motion": "^3.2.1",
+    "inspirational-quotes": "^1.0.8",
     "jest": "^26.6.3",
     "jquery": "^3.5.1",
     "mongoose": "^5.11.11",

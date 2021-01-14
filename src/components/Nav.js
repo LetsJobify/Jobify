@@ -82,7 +82,7 @@ export default function Nav() {
             <StarIcon />
           </Button>
           <Box mr="3" mt="4">
-            <span className='bold' >Signed in as:</span> {currentUser}.
+            <span className='bold' >Welcome back,</span> {currentUser}<span className='bold' >!</span>
           </Box>
         </div>
         : 

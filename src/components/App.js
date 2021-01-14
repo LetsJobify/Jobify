@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useColorMode } from '@chakra-ui/react';
+import { useColorMode, Image } from '@chakra-ui/react';
 
 // Import the necessary components to display inside of React-Router Switch logic.
 import Nav from './Nav';

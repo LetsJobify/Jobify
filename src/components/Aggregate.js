@@ -1,9 +1,58 @@
-import DataTable from 'react-data-table-component';
+import DataTable, { createTheme } from 'react-data-table-component';
 import { Box, Container, Center, Spinner } from "@chakra-ui/react"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { GlobalStateContext } from './App';
 
 
 export default function Aggregate() {
+
+  const { colorMode } = useContext(GlobalStateContext);
+
+  if (colorMode === 'dark') {
+    createTheme('mood', {
+      text: {
+        primary: '##FFFFFF',
+        secondary: '##FFFFFF',
+      },
+      background: {
+        default: '#000000',
+      },
+      context: {
+        background: '##FFFFFF',
+        text: '#FFFFFF',
+      },
+      divider: {
+        default: '#54545E',
+      },
+      action: {
+        button: '#FFFFFF',
+        hover: '#FFFFFF',
+        disabled: '#FFFFFF',
+      },
+    });
+  } else {
+    createTheme('mood', {
+      text: {
+        primary: '#000000',
+        secondary: '#000000',
+      },
+      background: {
+        default: '#FFFFFF',
+      },
+      context: {
+        background: '#FFFFFF',
+        text: '#FFFFFF',
+      },
+      divider: {
+        default: '#54545E',
+      },
+      action: {
+        button: 'rgba(0,0,0,.54)',
+        hover: 'rgba(0,0,0,.08)',
+        disabled: 'rgba(0,0,0,.12)',
+      },
+    });
+  }
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -16,7 +65,7 @@ export default function Aggregate() {
     setData(response);
     setIsLoading(false);
 
-  }, []);
+  }, [colorMode]);
 
   columns.push(
     {
@@ -81,6 +130,7 @@ export default function Aggregate() {
           data={dataArr}
           expandableRows
           expandableRowsComponent={<ExpandableComponent />}
+          theme='mood'
         />
       </div>
       )}
