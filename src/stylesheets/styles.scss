@@ -3,7 +3,7 @@
   flex-direction: row-reverse;
   // Don't know how to fix this shit yet.
   position: relative;
-  left: 50%;
+  justify-self: flex-end;
 }
 
 .spinner {
@@ -58,9 +58,18 @@
 }
 
 .modal-background .modal-content {
-  background: #0a1626;
+  background: #ffffff;
+  width: 100vw;
 }
 
 .date-picker {
   width: 16vw;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italy {
+  font-style: italic;
 }

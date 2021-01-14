@@ -15,6 +15,7 @@ module.exports = {
       '/': 'http://localhost:3000/',
     },
   },
+  devtool: "eval-cheap-source-map",
   module: {
     rules: [
       {

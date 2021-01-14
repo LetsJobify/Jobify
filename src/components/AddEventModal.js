@@ -25,7 +25,6 @@ export default function AddEventModal(props) {
   return (
     <Modal
       {...props}
-      size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
       className='modal-background'

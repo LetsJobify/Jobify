@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GlobalStateContext } from './App';
 import { InterviewStateContext } from './CalendarComponent';
+const Quote = require('inspirational-quotes');
 
 import {
   Box,
@@ -75,8 +76,6 @@ export default function Interview() {
       pr="4"
       pb="4"
       pl="4"
-      mt="6"
-      mb="6"
     >
       <div className='two_items'>
         <span>
@@ -184,7 +183,7 @@ export default function Interview() {
             <Text>Interviewer</Text>
             <Input 
               size="lg"
-              w="12vw"
+              w="9vw"
               onChange={(e) => setFormState({...formState, interviewer: e.target.value })}
             />
           </span>
@@ -235,9 +234,12 @@ export default function Interview() {
           </span>
         </div>
         <div className='one_item'>
-          <span>
-            <Text mt="2" mb="5">Fool me once, shame on... shame on you. Fool me—you can't get fooled again.</Text>
-          </span>
+          <Box w='28vw'>
+            <Flex direction="column">
+              <Text fontSize="sm" mt="2" >{Quote.getQuote().text}</Text>
+              <Text fontSize="xs" mb="5" className='italy' align='end'>- {Quote.getQuote().author}</Text>
+            </Flex>
+          </Box>
         </div>
       </div>
       ) : (

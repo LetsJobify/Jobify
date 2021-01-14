@@ -15,6 +15,7 @@ import {
   CalendarIcon,
   MoonIcon,
   SunIcon,
+  StarIcon
 } from '@chakra-ui/icons';
 
 export default function Nav() {
@@ -34,6 +35,7 @@ export default function Nav() {
           <Button onClick={toggleColorMode} className="" ml="2" mr="2" mt="-1">
             {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
           </Button>
+<<<<<<< HEAD
         ) : (
           <Button onClick={toggleColorMode} className="" ml="2" mr="2" mt="2">
             {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
@@ -94,6 +96,22 @@ export default function Nav() {
         ) : (
           <span></span>
         )}
+=======
+          <Button 
+            mt="2" 
+            mr="2"
+            onClick={() => setCurrentPage('Aggregate')}
+          >
+            <StarIcon />
+          </Button>
+          <Box mr="3" mt="4">
+            <span className='bold' >Welcome back,</span> {currentUser}<span className='bold' >!</span>
+          </Box>
+        </div>
+        : 
+        <span></span>
+        }
+>>>>>>> 299d708f5f003d4e71ecfdd7812edf5c51fa13f1
       </Box>
     </div>
   );

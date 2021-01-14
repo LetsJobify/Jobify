@@ -1,24 +1,11 @@
-import DataTable from 'react-data-table-component';
-import React, { useState, useEffect } from 'react';
+import DataTable, { createTheme } from 'react-data-table-component';
+import { Box, Container, Center, Spinner } from "@chakra-ui/react"
+import React, { useState, useEffect, useContext } from 'react';
+import { GlobalStateContext } from './App';
 
-/**full company data:
- * 
- * key={`companies${i}`}
-                id={company.id}
-                name={company.name}
-                rating={company.rating}
-                address={company.address}
-                offer={company.offer}
-                feedback={company.feedback}
-                questions={company.questions}
-                interviewer={company.interviewer}
-                logo={company.logo}
-                size={company.size}
-                date={company.date}
- */
 
-//add props once connected to db
 export default function Aggregate() {
+<<<<<<< HEAD
   const [dataArr, setData] = useState([]);
   const columns = [];
   useEffect(() => {
@@ -52,31 +39,116 @@ export default function Aggregate() {
   // .then((response) => {
   //   setCompanies(
   //     response.map((company, i) => {
+=======
 
-  // key: `companies${i}`,
-  // id: company.id,
-  // name: company.name,
-  // address: company.address,
-  // logo: company.logo,
-  // data: {company.size, company.name, company.address}
+  const { colorMode } = useContext(GlobalStateContext);
+>>>>>>> 299d708f5f003d4e71ecfdd7812edf5c51fa13f1
 
-  // const data = (companies) => {
-  //   const dataArr = [];
+  if (colorMode === 'dark') {
+    createTheme('mood', {
+      text: {
+        primary: '##FFFFFF',
+        secondary: '##FFFFFF',
+      },
+      background: {
+        default: '#000000',
+      },
+      context: {
+        background: '##FFFFFF',
+        text: '#FFFFFF',
+      },
+      divider: {
+        default: '#54545E',
+      },
+      action: {
+        button: '#FFFFFF',
+        hover: '#FFFFFF',
+        disabled: '#FFFFFF',
+      },
+    });
+  } else {
+    createTheme('mood', {
+      text: {
+        primary: '#000000',
+        secondary: '#000000',
+      },
+      background: {
+        default: '#FFFFFF',
+      },
+      context: {
+        background: '#FFFFFF',
+        text: '#FFFFFF',
+      },
+      divider: {
+        default: '#54545E',
+      },
+      action: {
+        button: 'rgba(0,0,0,.54)',
+        hover: 'rgba(0,0,0,.08)',
+        disabled: 'rgba(0,0,0,.12)',
+      },
+    });
+  }
 
-  //   let columns = 0;
-  //   for (let i = 0; i < companies.length; i += 1) {
-  //     dataArr.push({
-  //       id: companies.id,
-  //       title: companies.name,
-  //       feedback: companies.feedback,
-  //     });
-  //     columns.push({
-  //       title: companies.name,
-  //       selector: companies.name,
-  //       sortable: true,
-  //     });
-  //   }
-  // };
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [dataArr, setData] = useState([]);
+  const columns = [];
+  useEffect( async () => {
+    setIsLoading(true);
+    const request = await fetch('/interview/all/aggregate')
+    const response = await request.json();
+    setData(response);
+    setIsLoading(false);
+
+  }, [colorMode]);
+
+  columns.push(
+    {
+      name: 'Company',
+      selector: 'name',
+      sortable: true,
+    },
+    {
+      name: 'Rating',
+      selector: 'rating',
+      sortable: true,
+    },
+    {
+      name: 'Offer',
+      selector: 'offer',
+      sortable: true,
+    },
+    {
+      name: 'Interviewer',
+      selector: 'interviewer',
+      sortable: true,
+    },
+    {
+      name: 'Feedback',
+      selector: 'feedback',
+      sortable: true,
+    }
+  );
+
+  const ExpandableComponent = ({ data }) => {
+
+    return (
+      <Container ml="6" mt="2" mb="2">
+        <Box> <span className='bold'>Company:</span> {data.name} </Box>
+        <Box> <span className='bold'>Date:</span> {data.date.slice(0, 10)}</Box>
+        <Box> <span className='bold'>First Name:</span> {data.first_name}</Box>
+        <Box> <span className='bold'>Last Name:</span> {data.last_name}</Box>
+        <Box> <span className='bold'>Phone:</span> {data.phone}</Box>
+        <Box> <span className='bold'>Notes:</span> {data.pre_notes}</Box>
+        <Box> <span className='bold'>Questions:</span> {data.questions}</Box>
+        <Box> <span className='bold'>Feedback:</span> {data.feedback}</Box>
+        <Box> <span className='bold'>Interviewer:</span> {data.interviewer}</Box>
+        <Box> <span className='bold'>Offer:</span> {data.offer}</Box>
+      </Container>
+    );
+
+  };
 
   // const newArr = []
   // dataArr.forEach(el=> {
@@ -124,6 +196,7 @@ export default function Aggregate() {
   //   },
   // ];
   return (
+<<<<<<< HEAD
     <div>
     <div>
       what the fuck
@@ -141,5 +214,27 @@ export default function Aggregate() {
       />
     </div>
     </div>
+=======
+    <>
+      {isLoading ? (
+        <Center>
+          <Spinner size="xl" className='spinner'/>
+        </Center>
+      ) : (
+      <div className="companies">
+        <DataTable
+          defaultSortAsc="true"
+          Clicked
+          title="Company Listings"
+          columns={columns}
+          data={dataArr}
+          expandableRows
+          expandableRowsComponent={<ExpandableComponent />}
+          theme='mood'
+        />
+      </div>
+      )}
+    </>
+>>>>>>> 299d708f5f003d4e71ecfdd7812edf5c51fa13f1
   );
 }
