@@ -123,7 +123,6 @@ interviewController.updateInterview = (req, res, next) => {
     id,
   ];
 
-  console.log('interview Vals  ',interviewValue )
   db.query(interviewQuery, interviewValue)
     .then((data) => {
       res.locals.interview = data.rows[0];
@@ -174,7 +173,6 @@ interviewController.getInterviewsForUser = (req, res, next) => {
 
   const interviewValue = [id];
 
-  console.log('blah ', interviewQuery);
   db.query(interviewQuery, interviewValue)
     .then((data) => {
       res.locals.interview = data.rows;
