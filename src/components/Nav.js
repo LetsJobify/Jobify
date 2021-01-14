@@ -81,7 +81,7 @@ export default function Nav() {
             Aggregate
           </Button>
           <Box mr="3" mt="4">
-            Signed in as: {currentUser}.
+            Signed in as: {currentUser} Id: {currentUserId}.
           </Box>
         </div>
         : 

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { GlobalStateContext } from './App';
 import Calendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -10,7 +11,27 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export const InterviewStateContext = React.createContext();
 
 export default function CalendarComponent() {
+  const { currentUserId } = useContext(GlobalStateContext);
 
+  const [calendarEvents, setCalendarEvents] = useState([
+    { title: 'Google', date: '2021-01-12'}
+  ]);
+
+  useEffect( async () => {
+    const request = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    };
+
+    const response = await fetch(`/interview/all/user/${currentUserId}`, request);
+    const serverResponse = await response.json();
+    // const responseObj = serverResponse.map(res => {
+    //   { title: }
+    // })
+
+  }, []);
 
   // Interview form object state.
   const [ formState, setFormState ] = useState({
@@ -60,9 +81,6 @@ export default function CalendarComponent() {
     setModal(true);
   };
 
-  const [calendarEvents, setCalendarEvents] = useState([
-    { title: 'Interview', date: '2021-01-12'}
-  ]);
 
   return (
     <InterviewStateContext.Provider value={InterviewStateValues}>

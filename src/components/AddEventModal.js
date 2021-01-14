@@ -56,11 +56,8 @@ export default function AddEventModal(props) {
             accepted: formState.accepted,
           })
         };
-
         const response = await fetch('/interview', request);
-        const serverResponse = await response.json();
-        console.log(serverResponse);
-
+        
       }}>
         Submit
       </Button>

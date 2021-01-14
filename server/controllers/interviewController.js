@@ -164,15 +164,16 @@ interviewController.deleteInterview = (req, res, next) => {
 
 // get all interviews for user id within time range (expect time range in body)
 interviewController.getInterviewsForUser = (req, res, next) => {
-  const { id } = req.query.id;
+  const { id } = req.params;
   // get time constraints from body
-  const { timeStart, timeEnd } = req.body;
+  // const { timeStart, timeEnd } = req.body;
 
   const interviewQuery = `SELECT * FROM "interview" WHERE user_id=$1`; // query without time constraints
   // const interviewQuery = `SELECT * FROM "interview" WHERE user_id=$1 AND (date < ${timeEnd} AND date > ${timeStart})`;
 
   const interviewValue = [id];
 
+  console.log('blah ', interviewQuery);
   db.query(interviewQuery, interviewValue)
     .then((data) => {
       res.locals.interview = data.rows[0];

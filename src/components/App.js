@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import { useColorMode } from '@chakra-ui/react';
 
 // Import the necessary components to display inside of React-Router Switch logic.
@@ -41,8 +40,6 @@ export default function App() {
     setCurrentPage
   };
 
-
-
   return (
     <GlobalStateContext.Provider value={GlobalStateValue}>
       {loggedIn ? (
@@ -78,24 +75,4 @@ export default function App() {
       )}
     </GlobalStateContext.Provider>
   );
-
-//   <div>
-//   <Router>
-//     <Nav />
-//     <Switch>
-//     {/* Login/Register OR Home */}
-    
-//     {loggedIn && (
-//       <div>
-//         <Route path="/" component={Home} />
-//         <Route path="/Aggregate" component={Aggregate} />
-//         <Route path="/Bulletin" component={Bulletin} />
-//       </div>
-//     )}
-//     {!loggedIn && <Route path="/" component={Register} /> }
-
-//     {/* <Route exact path="/Fun" component={Fun} /> */}
-//     </Switch>
-//   </Router>
-// </div>
 }

@@ -71,7 +71,8 @@ export default function Register() {
       // "Log in" to the database.
       setLogin(true);
       setCurrentUser(registerState.registerEmail);
-      setCurrentUserId(serverResponse.id);
+      setCurrentUserId(serverResponse.__id);
+      console.log('Current user id is ', currentUserId)
     } else {
       setLogin(false);
     }
@@ -110,7 +111,7 @@ export default function Register() {
     if (serverResponse.success === true) {
       // "Log in" to the database.
       setCurrentUser(loginState.loginEmail);
-      setCurrentUserId(serverResponse.id);
+      setCurrentUserId(serverResponse.__id);
       setLogin(true);
     } else {
       setLogin(false);
