@@ -56,12 +56,6 @@ export default function App() {
               <Aggregate />
             </>
           )}
-          {currentPage === 'Slack' && (
-            <>
-              <Nav />
-              <Slack />
-            </>
-          )}
         </>
       ) : (
         <>

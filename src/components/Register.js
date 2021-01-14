@@ -67,14 +67,16 @@ export default function Register() {
     const serverResponse = await response.json();
 
     // If successful new user.
-    if (serverResponse.success === true) {
+    if (serverResponse['success'] === true) {
       // "Log in" to the database.
       setLogin(true);
       setCurrentUser(registerState.registerEmail);
       setCurrentUserId(serverResponse.__id);
-      console.log('Current user id is ', currentUserId)
+      setIsLoading(false);
+    
     } else {
       setLogin(false);
+      setIsLoading(false);
     }
     // Reset state values after login.
     setRegisterState({
@@ -85,7 +87,7 @@ export default function Register() {
       registerEmail: '',
       registerPassword: '',
     });
-    setIsLoading(false);
+    
   };
 
   // When a login form is submitted.

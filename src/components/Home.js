@@ -38,10 +38,10 @@ export default function Home() {
         <CalendarComponent />
       </Center>
       {currentCrumb === 'Company' && (
-        <div>Company</div>
+        <div></div>
       )}
       {currentCrumb === 'Upcoming Appointments' && (
-        <div>Upcoming Appointments</div>
+        <div></div>
       )}
     </div>
   );

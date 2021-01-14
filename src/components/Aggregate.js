@@ -27,6 +27,7 @@ export default function Aggregate() {
         hover: '#FFFFFF',
         disabled: '#FFFFFF',
       },
+      
     });
   } else {
     createTheme('mood', {
