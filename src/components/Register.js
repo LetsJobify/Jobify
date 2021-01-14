@@ -123,6 +123,13 @@ export default function Register() {
 
   return (
     <div>
+      <a className="jobify">
+        <img
+          src="https://i.ibb.co/BC3J017/jobify-logo.png"
+          alt="jobify-logo"
+          border="0"
+        />
+      </a>
       {isLoading ? (
         <Center>
           <Spinner size="xl" className="spinner" />

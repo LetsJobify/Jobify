@@ -15,6 +15,15 @@
   justify-content: center;
   margin-top: 5vh;
 }
+.jobify {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 8vh;
+}
+.jobify img {
+  max-width: 30%;
+}
 
 // Not necessary to keep this.
 .calendar {
