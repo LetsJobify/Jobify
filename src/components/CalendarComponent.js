@@ -27,7 +27,7 @@ export default function CalendarComponent() {
     const serverResponse = await response.json();
 
     const responseObj = serverResponse.map(res => {
-       return { title: res.name, date: res.date.slice(0, 10) };
+       return { title: `${res.name}. ${res.offer}`, date: res.date.slice(0, 10), id: res.__id };
     })
 
     setCalendarEvents(responseObj);
@@ -97,8 +97,8 @@ export default function CalendarComponent() {
           plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
           initialView="dayGridMonth"
           weekends={true}
-          selectable={false}
-          editable={false}
+          selectable={true}
+          editable={true}
           events={calendarEvents}
         />
       </div>
