@@ -70,13 +70,6 @@ export default function Nav() {
           <Button 
             mt="2" 
             mr="2"
-            onClick={() => setCurrentPage('Slack')}
-          >
-            <ChatIcon />
-          </Button>
-          <Button 
-            mt="2" 
-            mr="2"
             onClick={() => setCurrentPage('Aggregate')}
           >
             <StarIcon />

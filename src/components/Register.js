@@ -122,9 +122,30 @@ export default function Register() {
     setLoginState({ ...loginState, loginEmail: '', loginPassword: '' });
     setIsLoading(false);
   };
-
   return (
     <div>
+      {colorMode === 'dark' ? (
+      <>
+        <a className="jobify">
+        <img
+          src="https://i.ibb.co/wccm8rn/jobify-logo.png"
+          alt="jobify-logo"
+          border="0"
+        />
+        </a>
+      </>
+      ) : (
+      <>
+        <a className="jobify">
+        <img
+          src="https://i.ibb.co/BC3J017/jobify-logo.png"
+          alt="jobify-logo"
+          border="0"
+        />
+        </a>
+      </>
+      )}
+
       {isLoading ? (
         <Center>
           <Spinner size="xl" className="spinner" />
