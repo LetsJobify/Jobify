@@ -19,30 +19,35 @@ import React, { useState, useEffect } from 'react';
 
 //add props once connected to db
 export default function Aggregate() {
-  const [data, setData] = useState([]);
-  const [columns, setColumns] = useState([]);
-
+  const [dataArr, setData] = useState([]);
+  const columns = [];
   useEffect(() => {
-    fetch('/company')
+    fetch('/interview/all/aggregate')
       .then((data) => data.json())
       .then((response) => {
-        response.forEach((company, i) => {
-          setData({
-            id: company.id,
-            title: company.name,
-            feedback: company.feedback,
-          });
-          setColumns({
-            name: company.name,
-            selector: 'title',
-            sortable: true,
-          });
-        });
+        // response.forEach((company) => {
+        //   setData({
+        //     ...dataArr,
+        //     id: company.company_id,
+        //     title: company.name,
+        //     feedback: company.feedback,
+        //   });
+        setData(response);
+        // setColumns(Object.keys(response[0]));
+        // setColumns(response)
+        // setColumns({
+        //   ...columns,
+        //   name: company.name,
+        //   selector: 'title',
+        //   sortable: true,
+        // });
+        // });
+        //phone, name, interviewer, rating
       });
     return;
   }, []);
-  console.log('DATA:', data);
-  console.log('COLUMNS:', columns);
+  // console.log('DATA:', dataArr);
+  // console.log('COLUMNS:', columns);
   // .then((data) => data.json())
   // .then((response) => {
   //   setCompanies(
@@ -73,13 +78,62 @@ export default function Aggregate() {
   //   }
   // };
 
+  // const newArr = []
+  // dataArr.forEach(el=> {
+  //   newArr.push(el)
+  // })
+  columns.push(
+    {
+      name: 'Company',
+      selector: 'name',
+      sortable: true,
+    },
+    {
+      name: 'Rating',
+      selector: 'rating',
+      sortable: true,
+    },
+    {
+      name: 'Feedback',
+      selector: 'feedback',
+      sortable: true,
+    }
+  );
+  console.log('data-columns ', columns);
+
+  console.log('data-array ', dataArr);
+  const ExpandableComponent = ({ dataArr }) => (
+    <ul>
+      <li>Feedback: {dataArr.feedback}</li>
+      <li>Name: {dataArr.name}</li>
+      <li>Data: {dataArr.date}</li>
+    </ul>
+  );
+  // const exdata = [{ id: 1, title: 'Conan the Barbarian', year: '1982' }];
+  // const excolumns = [
+  //   {
+  //     name: 'Title',
+  //     selector: 'title',
+  //     sortable: true,
+  //   },
+  //   {
+  //     name: 'Year',
+  //     selector: 'year',
+  //     sortable: true,
+  //     right: true,
+  //   },
+  // ];
   return (
     <div className="companies">
       <DataTable
+        defaultSortAsc="true"
         Clicked
         title="Company Listings"
-        columns={[columns]}
-        data={[data]}
+        columns={columns}
+        data={dataArr}
+        expandableRows
+
+        // expandableRowsComponent={<ExpandableComponent />}
       />
     </div>
   );

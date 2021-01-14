@@ -6,6 +6,7 @@ import { useColorMode } from '@chakra-ui/react';
 import Nav from './Nav';
 import Home from './Home';
 import Register from './Register';
+import Aggregate from './Aggregate';
 
 // Define a global state solution.
 export const GlobalStateContext = React.createContext();
@@ -15,7 +16,7 @@ export default function App() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   // Who is the current user?
-  const [ currentUser, setCurrentUser ] = useState('');
+  const [currentUser, setCurrentUser] = useState('');
 
   // If the user is authenticated, render the Home.js component.
   // Otherwise, we need to render the Register.js component to allow them to register/sign in.
@@ -28,24 +29,24 @@ export default function App() {
     loggedIn,
     setLogin,
     currentUser,
-    setCurrentUser
+    setCurrentUser,
   };
 
   return (
     <GlobalStateContext.Provider value={GlobalStateValue}>
       <div>
-        <Nav />
         <Router>
+          <Nav />
           <Switch>
             {/* Login/Register OR Home */}
             {loggedIn ? (
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={Aggregate} />
             ) : (
+              // <Route exact path="/Aggregate" component="Aggregate"/>
               <Route exact path="/" component={Register} />
             )}
 
             {/* <Route exact path="/Bulletin" component={Bulletin} />
-            <Route exact path="/Data" component={Data} />
             <Route exact path="/Fun" component={Fun} /> */}
           </Switch>
         </Router>

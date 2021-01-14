@@ -217,36 +217,34 @@ interviewController.getInterviewsForCompany = (req, res, next) => {
     });
 };
 
-// get all interviews outcomes with accepted offers 
+// get all interviews outcomes with accepted offers
 interviewController.getOutcomes = (req, res, next) => {
-
-    const interviewQuery = `SELECT * FROM "interview" WHERE accepted = true ORDER BY date DESC`; 
-  
-    db.query(interviewQuery)
-      .then((data) => {
-        res.locals.interview = data.rows[0];
-        console.log('this is outcome data ', data.rows);
-        next();
-      })
-      .catch(() => {
-        next({
-          log: `interviewController.getOutcomes: ERROR: Error getting the outcome information from the database.`,
-          message: {
-            err:
-              'Error occurred in interviewController.getOutcomes. Check server logs for more details.',
-          },
-        });
-      });
-  };
-
-// get all interview aggregate data
-interviewController.aggregate = (req, res, next) => {
-
-  const interviewQuery = `SELECT i.__id as "iid",* FROM "interview" i LEFT OUTER JOIN "user" u ON "u".__id = "i".user_id LEFT OUTER JOIN "company" c ON "i".company_id = "c".__id`; 
+  const interviewQuery = `SELECT * FROM "interview" WHERE accepted = true ORDER BY date DESC`;
 
   db.query(interviewQuery)
     .then((data) => {
       res.locals.interview = data.rows[0];
+      console.log('this is outcome data ', data.rows);
+      next();
+    })
+    .catch(() => {
+      next({
+        log: `interviewController.getOutcomes: ERROR: Error getting the outcome information from the database.`,
+        message: {
+          err:
+            'Error occurred in interviewController.getOutcomes. Check server logs for more details.',
+        },
+      });
+    });
+};
+
+// get all interview aggregate data
+interviewController.aggregate = (req, res, next) => {
+  const interviewQuery = `SELECT i.__id as "iid",* FROM "interview" i LEFT OUTER JOIN "user" u ON "u".__id = "i".user_id LEFT OUTER JOIN "company" c ON "i".company_id = "c".__id`;
+
+  db.query(interviewQuery)
+    .then((data) => {
+      res.locals.interview = data.rows;
       console.log('this is outcome data ', data.rows);
       next();
     })
