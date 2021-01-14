@@ -33,9 +33,13 @@ export default function AddEventModal(props) {
       <Button variant="success" onClick={ async () => {
         onHide();
 
+        let methodText;
+        if (formState.new === true) methodText = 'POST';
+        else methodText = 'PUT';
+
         // Send a post request
         const request = {
-          method: 'POST',
+          method: methodText,
           headers: {
             'Content-Type': 'application/json',
           },
@@ -55,7 +59,11 @@ export default function AddEventModal(props) {
             accepted: formState.accepted,
           })
         };
-        const response = await fetch('/interview', request);
+
+        let response;
+        if (formState.new === true) response = await fetch('/interview', request);
+        else response = await fetch(`/interview/${formState.formId}`, request);
+        
       }}>
         Submit
       </Button>

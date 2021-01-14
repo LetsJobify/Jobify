@@ -11,7 +11,7 @@ interviewController.getInterview = (req, res, next) => {
   db.query(interviewQuery, interviewValue)
     .then((data) => {
       res.locals.interview = data.rows[0];
-      console.log('this is the data from the interview ', data.rows);
+      console.log('this is the data from the interview ', data.rows[0]);
       next();
     })
     .catch(() => {
@@ -168,7 +168,7 @@ interviewController.getInterviewsForUser = (req, res, next) => {
   // get time constraints from body
   // const { timeStart, timeEnd } = req.body;
 
-  const interviewQuery = `SELECT * FROM "interview" LEFT OUTER JOIN "company" ON "interview".company_id="company".__id WHERE user_id=$1`; // query without time constraints
+  const interviewQuery = `SELECT "interview".__id as "iid",* FROM "interview" LEFT OUTER JOIN "company" ON "interview".company_id="company".__id WHERE user_id=$1`; // query without time constraints
   // const interviewQuery = `SELECT * FROM "interview" WHERE user_id=$1 AND (date < ${timeEnd} AND date > ${timeStart})`;
 
   const interviewValue = [id];

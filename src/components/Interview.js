@@ -29,7 +29,14 @@ export default function Interview() {
 
   const [ options, setOptions ] = useState([]);
 
+  const [textVal, setTextVal] = useState('');
+  const [authorVal, setAuthorVal] = useState('');
+
   useEffect( async () => {
+    setTextVal(Quote.getQuote().text);
+    setAuthorVal(Quote.getQuote().author);
+
+
     const request = {
       method: 'GET',
       headers: {
@@ -84,6 +91,7 @@ export default function Interview() {
             w="16vw"
             placeholder="Select"
             onChange={(e) => setFormState({...formState, company: e.target.value })}
+            value={formState.company}
           >
             {options.map(el => {
               return <option key={el.id} value={el.id}>{el.name}</option>
@@ -96,6 +104,7 @@ export default function Interview() {
           w="16vw" 
           placeholder="yyyy-mm-dd"
           onChange={(e) => setFormState({...formState, date: e.target.value })}
+          value={formState.date}
           />
         </span>
       </div>
@@ -107,6 +116,7 @@ export default function Interview() {
             size="lg"
             w="30vw"
             onChange={(e) => setFormState({...formState, address: e.target.value })}
+            value={formState.value}
           />
         </span>
       </div>
@@ -120,6 +130,7 @@ export default function Interview() {
             w="30vw"
             h="12vh"
             onChange={(e) => setFormState({...formState, notes: e.target.value })}
+            value={formState.notes}
           />
         </span>
       </div>
@@ -146,6 +157,7 @@ export default function Interview() {
               w="30vw"
               h="6vh"
               onChange={(e) => setFormState({...formState, feedback: e.target.value })}
+              value={formState.feedback}
             />
           </span>
         </div>
@@ -156,6 +168,7 @@ export default function Interview() {
               w="8vw"
               placeholder="Select"
               onChange={(e) => setFormState({...formState, type: e.target.value })}
+              value={formState.type}
             >
               <option value="Behavioral">Behavioral</option>
               <option value="Technical">Technical</option>
@@ -185,6 +198,7 @@ export default function Interview() {
               size="lg"
               w="9vw"
               onChange={(e) => setFormState({...formState, interviewer: e.target.value })}
+              value={formState.interviewer}
             />
           </span>
         </div>
@@ -199,6 +213,7 @@ export default function Interview() {
               w="30vw"
               h="6vh"
               onChange={(e) => setFormState({...formState, faq: e.target.value })}
+              value={formState.faq}
             />
           </span>
         </div>
@@ -227,6 +242,7 @@ export default function Interview() {
               w="16vw"
               placeholder="Select"
               onChange={(e) => setFormState({...formState, accepted: e.target.value })}
+              value={formState.accepted}
             >
               <option value="no">No</option>
               <option value="yes">Yes</option>
@@ -236,8 +252,8 @@ export default function Interview() {
         <div className='one_item'>
           <Box w='28vw'>
             <Flex direction="column">
-              <Text fontSize="sm" mt="2" >{Quote.getQuote().text}</Text>
-              <Text fontSize="xs" mb="5" className='italy' align='end'>- {Quote.getQuote().author}</Text>
+              <Text fontSize="sm" mt="2" >{textVal}</Text>
+              <Text fontSize="xs" mb="5" className='italy' align='end'>- {authorVal}</Text>
             </Flex>
           </Box>
         </div>
