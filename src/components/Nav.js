@@ -35,68 +35,6 @@ export default function Nav() {
           <Button onClick={toggleColorMode} className="" ml="2" mr="2" mt="-1">
             {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
           </Button>
-<<<<<<< HEAD
-        ) : (
-          <Button onClick={toggleColorMode} className="" ml="2" mr="2" mt="2">
-            {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
-          </Button>
-        )}
-
-        {loggedIn ? (
-          <div className="flex">
-            <Menu>
-              <MenuButton
-                as={Button}
-                leftIcon={<ChevronDownIcon />}
-                mt="2"
-                mr="2"
-              >
-                User
-              </MenuButton>
-              <MenuList>
-                <MenuItem
-                  onClick={() => {
-                    setLogin(false);
-                    setCurrentUser('');
-                  }}
-                >
-                  Sign Out
-                </MenuItem>
-              </MenuList>
-            </Menu>
-            <Router>
-              <Link to="/">
-                <Button mt="2" mr="2">
-                  <CalendarIcon />
-                </Button>
-              </Link>
-
-              <Link to="/bulletin">
-                <Button mt="2" mr="2">
-                  <ChatIcon />
-                </Button>
-              </Link>
-
-              <Link to="/aggregate">
-                <Button mt="2" mr="2">
-                  Data
-                </Button>
-              </Link>
-
-              <Link to="/fun">
-                <Button mt="2" mr="2">
-                  Fun
-                </Button>
-              </Link>
-            </Router>
-            <Box mr="3" mt="4">
-              Signed in as: {currentUser}.
-            </Box>
-          </div>
-        ) : (
-          <span></span>
-        )}
-=======
           <Button 
             mt="2" 
             mr="2"
@@ -111,7 +49,6 @@ export default function Nav() {
         : 
         <span></span>
         }
->>>>>>> 299d708f5f003d4e71ecfdd7812edf5c51fa13f1
       </Box>
     </div>
   );

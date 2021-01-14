@@ -5,44 +5,8 @@ import { GlobalStateContext } from './App';
 
 
 export default function Aggregate() {
-<<<<<<< HEAD
-  const [dataArr, setData] = useState([]);
-  const columns = [];
-  useEffect(() => {
-    fetch('/interview/all/aggregate')
-      .then((data) => data.json())
-      .then((response) => {
-        // response.forEach((company) => {
-        //   setData({
-        //     ...dataArr,
-        //     id: company.company_id,
-        //     title: company.name,
-        //     feedback: company.feedback,
-        //   });
-        setData(response);
-        // setColumns(Object.keys(response[0]));
-        // setColumns(response)
-        // setColumns({
-        //   ...columns,
-        //   name: company.name,
-        //   selector: 'title',
-        //   sortable: true,
-        // });
-        // });
-        //phone, name, interviewer, rating
-      });
-    return;
-  }, []);
-  // console.log('DATA:', dataArr);
-  // console.log('COLUMNS:', columns);
-  // .then((data) => data.json())
-  // .then((response) => {
-  //   setCompanies(
-  //     response.map((company, i) => {
-=======
 
   const { colorMode } = useContext(GlobalStateContext);
->>>>>>> 299d708f5f003d4e71ecfdd7812edf5c51fa13f1
 
   if (colorMode === 'dark') {
     createTheme('mood', {

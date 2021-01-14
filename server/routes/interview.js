@@ -22,13 +22,9 @@ router.get('/all/accepted/', interviewController.getOutcomes, (req, res) =>
 );
 
 // get all interviews based on aggregate query
-<<<<<<< HEAD
 router.get('/all/aggregate/', interviewController.aggregate, (req, res) =>
   res.status(200).json(res.locals.interview)
 );
-=======
-router.get('/all/aggregate/', interviewController.aggregate, (req,res)=> res.status(200).json(res.locals.interview));
->>>>>>> 299d708f5f003d4e71ecfdd7812edf5c51fa13f1
 
 // interview form - single interview
 router.get('/:id', interviewController.getInterview, (req, res) =>
