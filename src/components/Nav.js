@@ -15,7 +15,7 @@ import {
   CalendarIcon,
   MoonIcon,
   SunIcon,
-  StarIcon
+  StarIcon,
 } from '@chakra-ui/icons';
 
 export default function Nav() {
@@ -26,6 +26,9 @@ export default function Nav() {
     setLogin,
     currentUser,
     setCurrentUser,
+    currentUserId,
+    setCurrentUserId,
+    setCurrentPage,
   } = useContext(GlobalStateContext);
 
   return (
@@ -35,20 +38,53 @@ export default function Nav() {
           <Button onClick={toggleColorMode} className="" ml="2" mr="2" mt="-1">
             {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
           </Button>
-          <Button 
-            mt="2" 
-            mr="2"
-            onClick={() => setCurrentPage('Aggregate')}
-          >
-            <StarIcon />
+        ) : (
+          <Button onClick={toggleColorMode} className="" ml="2" mr="2" mt="2">
+            {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
           </Button>
-          <Box mr="3" mt="4">
-            <span className='bold' >Welcome back,</span> {currentUser}<span className='bold' >!</span>
-          </Box>
-        </div>
-        : 
-        <span></span>
-        }
+        )}
+
+        {loggedIn ? (
+          <div className="flex">
+            <Menu>
+              <MenuButton
+                as={Button}
+                leftIcon={<ChevronDownIcon />}
+                mt="2"
+                mr="2"
+              >
+                User
+              </MenuButton>
+              <MenuList>
+                <MenuItem
+                  onClick={() => {
+                    setLogin(false);
+                    setCurrentUser('');
+                    setCurrentUserId('');
+                    setCurrentPage('Home');
+                  }}
+                >
+                  Sign Out
+                </MenuItem>
+              </MenuList>
+            </Menu>
+            <Button mt="2" mr="2" onClick={() => setCurrentPage('Home')}>
+              <CalendarIcon />
+            </Button>
+            <Button mt="2" mr="2" onClick={() => setCurrentPage('Slack')}>
+              <ChatIcon />
+            </Button>
+            <Button mt="2" mr="2" onClick={() => setCurrentPage('Aggregate')}>
+              <StarIcon />
+            </Button>
+            <Box mr="3" mt="4">
+              <span className="bold">Welcome back,</span> {currentUser}
+              <span className="bold">!</span>
+            </Box>
+          </div>
+        ) : (
+          <span></span>
+        )}
       </Box>
     </div>
   );

@@ -1,11 +1,9 @@
 import DataTable, { createTheme } from 'react-data-table-component';
-import { Box, Container, Center, Spinner } from "@chakra-ui/react"
+import { Box, Container, Center, Spinner } from '@chakra-ui/react';
 import React, { useState, useEffect, useContext } from 'react';
 import { GlobalStateContext } from './App';
 
-
 export default function Aggregate() {
-
   const { colorMode } = useContext(GlobalStateContext);
 
   if (colorMode === 'dark') {
@@ -58,13 +56,12 @@ export default function Aggregate() {
 
   const [dataArr, setData] = useState([]);
   const columns = [];
-  useEffect( async () => {
+  useEffect(async () => {
     setIsLoading(true);
-    const request = await fetch('/interview/all/aggregate')
+    const request = await fetch('/interview/all/aggregate');
     const response = await request.json();
     setData(response);
     setIsLoading(false);
-
   }, [colorMode]);
 
   columns.push(
@@ -96,22 +93,50 @@ export default function Aggregate() {
   );
 
   const ExpandableComponent = ({ data }) => {
-
     return (
       <Container ml="6" mt="2" mb="2">
-        <Box> <span className='bold'>Company:</span> {data.name} </Box>
-        <Box> <span className='bold'>Date:</span> {data.date.slice(0, 10)}</Box>
-        <Box> <span className='bold'>First Name:</span> {data.first_name}</Box>
-        <Box> <span className='bold'>Last Name:</span> {data.last_name}</Box>
-        <Box> <span className='bold'>Phone:</span> {data.phone}</Box>
-        <Box> <span className='bold'>Notes:</span> {data.pre_notes}</Box>
-        <Box> <span className='bold'>Questions:</span> {data.questions}</Box>
-        <Box> <span className='bold'>Feedback:</span> {data.feedback}</Box>
-        <Box> <span className='bold'>Interviewer:</span> {data.interviewer}</Box>
-        <Box> <span className='bold'>Offer:</span> {data.offer}</Box>
+        <Box>
+          {' '}
+          <span className="bold">Company:</span> {data.name}{' '}
+        </Box>
+        <Box>
+          {' '}
+          <span className="bold">Date:</span> {data.date.slice(0, 10)}
+        </Box>
+        <Box>
+          {' '}
+          <span className="bold">First Name:</span> {data.first_name}
+        </Box>
+        <Box>
+          {' '}
+          <span className="bold">Last Name:</span> {data.last_name}
+        </Box>
+        <Box>
+          {' '}
+          <span className="bold">Phone:</span> {data.phone}
+        </Box>
+        <Box>
+          {' '}
+          <span className="bold">Notes:</span> {data.pre_notes}
+        </Box>
+        <Box>
+          {' '}
+          <span className="bold">Questions:</span> {data.questions}
+        </Box>
+        <Box>
+          {' '}
+          <span className="bold">Feedback:</span> {data.feedback}
+        </Box>
+        <Box>
+          {' '}
+          <span className="bold">Interviewer:</span> {data.interviewer}
+        </Box>
+        <Box>
+          {' '}
+          <span className="bold">Offer:</span> {data.offer}
+        </Box>
       </Container>
     );
-
   };
 
   // const newArr = []
@@ -135,70 +160,63 @@ export default function Aggregate() {
       sortable: true,
     }
   );
+
+  // const TextField = styled.input`
+  //   height: 32px;
+  //   width: 200px;
+  //   border-radius: 3px;
+  //   border-top-left-radius: 5px;
+  //   border-bottom-left-radius: 5px;
+  //   border-top-right-radius: 0;
+  //   border-bottom-right-radius: 0;
+  //   border: 1px solid #e5e5e5;
+  //   padding: 0 32px 0 16px;
+
+  //   &:hover {
+  //     cursor: pointer;
+  //   }
+  // `;
+
+  //   const ClearButton = styled(Button)`
+  //   border-top-left-radius: 0;
+  //   border-bottom-left-radius: 0;
+  //   border-top-right-radius: 5px;
+  //   border-bottom-right-radius: 5px;
+  //         columns={columns}
+  //   height: 34px;
+  //   width: 32px;
+  //   text-align: center;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  // `;
   console.log('data-columns ', columns);
 
   console.log('data-array ', dataArr);
-  const ExpandableComponent = ({ dataArr }) => (
-    <ul>
-      <li>Feedback: {dataArr.feedback}</li>
-      <li>Name: {dataArr.name}</li>
-      <li>Data: {dataArr.date}</li>
-    </ul>
-  );
-  // const exdata = [{ id: 1, title: 'Conan the Barbarian', year: '1982' }];
-  // const excolumns = [
-  //   {
-  //     name: 'Title',
-  //     selector: 'title',
-  //     sortable: true,
-  //   },
-  //   {
-  //     name: 'Year',
-  //     selector: 'year',
-  //     sortable: true,
-  //     right: true,
-  //   },
-  // ];
   return (
-<<<<<<< HEAD
-    <div>
-    <div>
-      what the fuck
-    </div>
-    <div className="companies">
-      <DataTable
-        defaultSortAsc="true"
-        Clicked
-        title="Company Listings"
-        columns={columns}
-        data={dataArr}
-        expandableRows
-
-        // expandableRowsComponent={<ExpandableComponent />}
-      />
-    </div>
-    </div>
-=======
     <>
       {isLoading ? (
         <Center>
-          <Spinner size="xl" className='spinner'/>
+          <Spinner size="xl" className="spinner" />
         </Center>
       ) : (
-      <div className="companies">
-        <DataTable
-          defaultSortAsc="true"
-          Clicked
-          title="Company Listings"
-          columns={columns}
-          data={dataArr}
-          expandableRows
-          expandableRowsComponent={<ExpandableComponent />}
-          theme='mood'
-        />
-      </div>
+        <div className="companies">
+          <DataTable
+            defaultSortField="name"
+            defaultSortAsc={false}
+            Clicked
+            title="Company Listings"
+            columns={columns}
+            pagination
+            data={dataArr}
+            expandableRows
+            persistTableHead
+            striped
+            expandableRowsComponent={<ExpandableComponent />}
+            theme="mood"
+          />
+        </div>
       )}
     </>
->>>>>>> 299d708f5f003d4e71ecfdd7812edf5c51fa13f1
   );
 }

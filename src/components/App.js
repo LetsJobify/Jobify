@@ -6,10 +6,7 @@ import Nav from './Nav';
 import Home from './Home';
 import Register from './Register';
 import Aggregate from './Aggregate';
-<<<<<<< HEAD
-import Slack from './bulletinBoard'
-=======
->>>>>>> WedEvening
+import Slack from './bulletinBoard';
 
 // Define a global state solution.
 export const GlobalStateContext = React.createContext();
@@ -19,19 +16,15 @@ export default function App() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   // Who is the current user?
-<<<<<<< HEAD
-  const [ currentUser, setCurrentUser ] = useState('');
-  const [ currentUserId, setCurrentUserId ] = useState('');
-=======
   const [currentUser, setCurrentUser] = useState('');
->>>>>>> WedEvening
+  const [currentUserId, setCurrentUserId] = useState('');
 
   // If the user is authenticated, render the Home.js component.
   // Otherwise, we need to render the Register.js component to allow them to register/sign in.
   const [loggedIn, setLogin] = useState(false);
 
   // Because React Router is not fucking working, fuck it, we'll do it live.
-  const [ currentPage, setCurrentPage ] = useState('Home');
+  const [currentPage, setCurrentPage] = useState('Home');
 
   // Define the values that will go into the Global State Context.
   const GlobalStateValue = {
@@ -41,18 +34,14 @@ export default function App() {
     setLogin,
     currentUser,
     setCurrentUser,
-<<<<<<< HEAD
     currentUserId,
     setCurrentUserId,
     currentPage,
-    setCurrentPage
-=======
->>>>>>> WedEvening
+    setCurrentPage,
   };
 
   return (
     <GlobalStateContext.Provider value={GlobalStateValue}>
-<<<<<<< HEAD
       {loggedIn ? (
         <>
           {currentPage === 'Home' && (
@@ -84,25 +73,6 @@ export default function App() {
           )}
         </>
       )}
-=======
-      <div>
-        <Router>
-          <Nav />
-          <Switch>
-            {/* Login/Register OR Home */}
-            {loggedIn ? (
-              <Route exact path="/" component={Aggregate} />
-            ) : (
-              // <Route exact path="/Aggregate" component="Aggregate"/>
-              <Route exact path="/" component={Register} />
-            )}
-
-            {/* <Route exact path="/Bulletin" component={Bulletin} />
-            <Route exact path="/Fun" component={Fun} /> */}
-          </Switch>
-        </Router>
-      </div>
->>>>>>> WedEvening
     </GlobalStateContext.Provider>
   );
 }

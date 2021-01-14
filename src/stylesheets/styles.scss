@@ -5,7 +5,15 @@
   position: relative;
   justify-self: flex-end;
 }
-
+.jobify {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 8vh;
+}
+.jobify img {
+  max-width: 30%;
+}
 .spinner {
   margin-top: 30vh;
 }
@@ -13,7 +21,7 @@
 .__register--Login {
   display: flex;
   justify-content: center;
-  margin-top: 5vh;
+  // margin-top: 5vh;
 }
 
 // Not necessary to keep this.

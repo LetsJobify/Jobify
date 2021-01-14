@@ -14,7 +14,14 @@ import { EmailIcon, UnlockIcon } from '@chakra-ui/icons';
 
 export default function Register() {
   // Importing color mode for day/night logic. setLogin defines if logged in. We need to know current user.
-  const { colorMode, setLogin, currentUser, setCurrentUser, currentUserId, setCurrentUserId } = useContext(GlobalStateContext);
+  const {
+    colorMode,
+    setLogin,
+    currentUser,
+    setCurrentUser,
+    currentUserId,
+    setCurrentUserId,
+  } = useContext(GlobalStateContext);
 
   // Set up "loading" state.
   const [isLoading, setIsLoading] = useState(false);
@@ -72,7 +79,7 @@ export default function Register() {
       setLogin(true);
       setCurrentUser(registerState.registerEmail);
       setCurrentUserId(serverResponse.__id);
-      console.log('Current user id is ', currentUserId)
+      console.log('Current user id is ', currentUserId);
     } else {
       setLogin(false);
     }
@@ -120,9 +127,15 @@ export default function Register() {
     setLoginState({ ...loginState, loginEmail: '', loginPassword: '' });
     setIsLoading(false);
   };
-
   return (
     <div>
+      <a className="jobify">
+        <img
+          src="https://i.ibb.co/BC3J017/jobify-logo.png"
+          alt="jobify-logo"
+          border="0"
+        />
+      </a>
       {isLoading ? (
         <Center>
           <Spinner size="xl" className="spinner" />
