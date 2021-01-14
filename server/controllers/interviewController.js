@@ -247,7 +247,7 @@ interviewController.aggregate = (req, res, next) => {
 
   db.query(interviewQuery)
     .then((data) => {
-      res.locals.interview = data.rows[0];
+      res.locals.interview = data.rows;
       console.log('this is outcome data ', data.rows);
       next();
     })
