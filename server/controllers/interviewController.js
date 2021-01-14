@@ -4,7 +4,7 @@ const interviewController = {};
 
 // get single interview information
 interviewController.getInterview = (req, res, next) => {
-  const { id } = req.query.id;
+  const { id } = req.params;
   const interviewQuery = `SELECT * FROM "interview" WHERE __id=$1`;
   const interviewValue = [id];
 
@@ -88,7 +88,7 @@ interviewController.createInterview = (req, res, next) => {
 
 // update interview of given interview id with fields from the body
 interviewController.updateInterview = (req, res, next) => {
-  const { id } = req.query.id;
+  const { id } = req.params;
   const {
     user_id,
     company_id,
@@ -142,7 +142,7 @@ interviewController.updateInterview = (req, res, next) => {
 
 // delete interview of given interview id
 interviewController.deleteInterview = (req, res, next) => {
-  const { id } = req.query.id;
+  const { id } = req.params;
   const interviewQuery = `DELETE FROM "interview" WHERE __id=$1`;
   const interviewValue = [id];
 
@@ -168,7 +168,7 @@ interviewController.getInterviewsForUser = (req, res, next) => {
   // get time constraints from body
   // const { timeStart, timeEnd } = req.body;
 
-  const interviewQuery = `SELECT * FROM "interview" WHERE user_id=$1`; // query without time constraints
+  const interviewQuery = `SELECT * FROM "interview" LEFT OUTER JOIN "company" ON "interview".company_id="company".__id WHERE user_id=$1`; // query without time constraints
   // const interviewQuery = `SELECT * FROM "interview" WHERE user_id=$1 AND (date < ${timeEnd} AND date > ${timeStart})`;
 
   const interviewValue = [id];
@@ -193,7 +193,7 @@ interviewController.getInterviewsForUser = (req, res, next) => {
 
 // get all interviews for company id within time range (expect time range in body)
 interviewController.getInterviewsForCompany = (req, res, next) => {
-  const { id } = req.query.id;
+  const { id } = req.params;
   // get time constraints from body
   const { timeStart, timeEnd } = req.body;
   const interviewQuery = `SELECT * FROM "interview" WHERE company_id=$1`; // query without time constraints
