@@ -52,7 +52,7 @@ export default function CalendarComponent() {
     interviewer: '',
     faq: '',
     offer: '125,000.00',
-    accepted: '',
+    accepted: 'false',
     formId: '',
   });
 
@@ -100,11 +100,11 @@ export default function CalendarComponent() {
       notes: '',
       feedback: '',
       type: '',
-      rating: '',
+      rating: '0',
       interviewer: '',
       faq: '',
       offer: '125,000.00',
-      accepted: '',
+      accepted: 'false',
       formId: '',
     });
   };

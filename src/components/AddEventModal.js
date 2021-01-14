@@ -63,7 +63,7 @@ export default function AddEventModal(props) {
         let response;
         if (formState.new === true) response = await fetch('/interview', request);
         else response = await fetch(`/interview/${formState.formId}`, request);
-        
+        console.log('request obj send bak ', request)
       }}>
         Submit
       </Button>
