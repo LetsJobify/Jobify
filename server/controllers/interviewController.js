@@ -176,7 +176,7 @@ interviewController.getInterviewsForUser = (req, res, next) => {
   console.log('blah ', interviewQuery);
   db.query(interviewQuery, interviewValue)
     .then((data) => {
-      res.locals.interview = data.rows[0];
+      res.locals.interview = data.rows;
       console.log('this is the data from the interview ', data.rows);
       next();
     })

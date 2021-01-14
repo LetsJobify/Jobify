@@ -7,7 +7,7 @@ import Interview from './Interview'
 export default function AddEventModal(props) {
 
   // This is the functionalty that hides the popup modal.
-  const { onHide } = props;
+  const { onHide, setCalendarEvents } = props;
 
   const { 
     formState,
@@ -57,7 +57,6 @@ export default function AddEventModal(props) {
           })
         };
         const response = await fetch('/interview', request);
-        
       }}>
         Submit
       </Button>

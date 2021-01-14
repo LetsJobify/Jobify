@@ -6,7 +6,7 @@ import Nav from './Nav';
 import Home from './Home';
 import Register from './Register';
 import Aggregate from './Aggregate';
-import Bulletin from './bulletinBoard'
+import Slack from './bulletinBoard'
 
 // Define a global state solution.
 export const GlobalStateContext = React.createContext();
@@ -56,10 +56,10 @@ export default function App() {
               <Aggregate />
             </>
           )}
-          {currentPage === 'Bulletin' && (
+          {currentPage === 'Slack' && (
             <>
               <Nav />
-              <Bulletin />
+              <Slack />
             </>
           )}
         </>

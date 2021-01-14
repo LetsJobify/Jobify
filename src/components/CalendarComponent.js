@@ -13,9 +13,7 @@ export const InterviewStateContext = React.createContext();
 export default function CalendarComponent() {
   const { currentUserId } = useContext(GlobalStateContext);
 
-  const [calendarEvents, setCalendarEvents] = useState([
-    { title: 'Google', date: '2021-01-12'}
-  ]);
+  const [calendarEvents, setCalendarEvents] = useState([]);
 
   useEffect( async () => {
     const request = {
@@ -27,11 +25,14 @@ export default function CalendarComponent() {
 
     const response = await fetch(`/interview/all/user/${currentUserId}`, request);
     const serverResponse = await response.json();
-    // const responseObj = serverResponse.map(res => {
-    //   { title: }
-    // })
 
-  }, []);
+    const responseObj = serverResponse.map(res => {
+       return { title: res.name, date: res.date.slice(0, 10) };
+    })
+
+    setCalendarEvents(responseObj);
+
+  }, [AddEventModal]);
 
   // Interview form object state.
   const [ formState, setFormState ] = useState({
@@ -90,7 +91,7 @@ export default function CalendarComponent() {
             New Interview
           </Button>
 
-          <AddEventModal show={showModal} onHide={addModalClose} />
+          <AddEventModal props={calendarEvents, setCalendarEvents} show={showModal} onHide={addModalClose} />
         </ButtonToolbar>
         <Calendar
           plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}

@@ -69,7 +69,7 @@ export default function Nav() {
           <Button 
             mt="2" 
             mr="2"
-            onClick={() => setCurrentPage('Bulletin')}
+            onClick={() => setCurrentPage('Slack')}
           >
             <ChatIcon />
           </Button>
