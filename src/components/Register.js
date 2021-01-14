@@ -69,14 +69,13 @@ export default function Register() {
     // If successful new user.
     if (serverResponse['success'] === true) {
       // "Log in" to the database.
-      setLogin(true);
       setCurrentUser(registerState.registerEmail);
       setCurrentUserId(serverResponse.__id);
-      setIsLoading(false);
+      setLogin(true);
     
     } else {
       setLogin(false);
-      setIsLoading(false);
+
     }
     // Reset state values after login.
     setRegisterState({
@@ -87,7 +86,7 @@ export default function Register() {
       registerEmail: '',
       registerPassword: '',
     });
-    
+    setIsLoading(false);
   };
 
   // When a login form is submitted.

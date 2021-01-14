@@ -57,18 +57,19 @@ interviewController.createInterview = (req, res, next) => {
     String(type),
     String(interviewer),
     String(address),
-    offer,
+    String(offer),
     String(pre_notes),
     String(feedback),
     String(improve),
     String(questions),
     accepted,
   ];
-
+  console.log('Value is: ', value)
   const addInterviewQuery = `INSERT INTO "interview" (user_id, company_id, date, rating, type, interviewer, address, offer, pre_notes, feedback, improve, questions, accepted) VALUES ($1, $2, $3,$4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING __id, user_id`;
   // Add the user to the database
   db.query(addInterviewQuery, value)
     .then((data) => {
+      
       res.locals.newInterview = data;
       console.log('Interview added');
       next();

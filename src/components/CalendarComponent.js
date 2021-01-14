@@ -48,7 +48,7 @@ export default function CalendarComponent() {
     
     const responseObj = serverResponse.map(res => {
       console.log(res.iid);
-       return { title: `${res.name}. $${res.offer}`, date: res.date.slice(0, 10), id: res.iid };
+       return { title: `${res.name}. ${res.offer}`, date: res.date.slice(0, 10), id: res.iid };
     })
     
     setCalendarEvents(responseObj);
