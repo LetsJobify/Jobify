@@ -6,7 +6,10 @@ import Nav from './Nav';
 import Home from './Home';
 import Register from './Register';
 import Aggregate from './Aggregate';
+<<<<<<< HEAD
 import Slack from './bulletinBoard'
+=======
+>>>>>>> WedEvening
 
 // Define a global state solution.
 export const GlobalStateContext = React.createContext();
@@ -16,8 +19,12 @@ export default function App() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   // Who is the current user?
+<<<<<<< HEAD
   const [ currentUser, setCurrentUser ] = useState('');
   const [ currentUserId, setCurrentUserId ] = useState('');
+=======
+  const [currentUser, setCurrentUser] = useState('');
+>>>>>>> WedEvening
 
   // If the user is authenticated, render the Home.js component.
   // Otherwise, we need to render the Register.js component to allow them to register/sign in.
@@ -34,14 +41,18 @@ export default function App() {
     setLogin,
     currentUser,
     setCurrentUser,
+<<<<<<< HEAD
     currentUserId,
     setCurrentUserId,
     currentPage,
     setCurrentPage
+=======
+>>>>>>> WedEvening
   };
 
   return (
     <GlobalStateContext.Provider value={GlobalStateValue}>
+<<<<<<< HEAD
       {loggedIn ? (
         <>
           {currentPage === 'Home' && (
@@ -73,6 +84,25 @@ export default function App() {
           )}
         </>
       )}
+=======
+      <div>
+        <Router>
+          <Nav />
+          <Switch>
+            {/* Login/Register OR Home */}
+            {loggedIn ? (
+              <Route exact path="/" component={Aggregate} />
+            ) : (
+              // <Route exact path="/Aggregate" component="Aggregate"/>
+              <Route exact path="/" component={Register} />
+            )}
+
+            {/* <Route exact path="/Bulletin" component={Bulletin} />
+            <Route exact path="/Fun" component={Fun} /> */}
+          </Switch>
+        </Router>
+      </div>
+>>>>>>> WedEvening
     </GlobalStateContext.Provider>
   );
 }
