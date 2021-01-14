@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Center, Spinner } from "@chakra-ui/react"
 import { GlobalStateContext } from './App';
 import Calendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -12,7 +13,7 @@ export const InterviewStateContext = React.createContext();
 
 export default function CalendarComponent() {
   const { currentUserId } = useContext(GlobalStateContext);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [calendarEvents, setCalendarEvents] = useState([]);
 
   useEffect( async () => {
@@ -23,6 +24,7 @@ export default function CalendarComponent() {
       }
     };
 
+    setIsLoading(true);
     const response = await fetch(`/interview/all/user/${currentUserId}`, request);
     const serverResponse = await response.json();
 
@@ -31,6 +33,7 @@ export default function CalendarComponent() {
     })
 
     setCalendarEvents(responseObj);
+    setIsLoading(false);
 
   }, [AddEventModal]);
 
@@ -85,23 +88,29 @@ export default function CalendarComponent() {
 
   return (
     <InterviewStateContext.Provider value={InterviewStateValues}>
-      <div className="calendar">
-        <ButtonToolbar>
-          <Button variant="primary" onClick={addModalOpen}>
-            New Interview
-          </Button>
+      {isLoading ? (
+        <Center>
+          <Spinner size="xl" className="spinner" />
+        </Center>
+      ) : (
+        <div className="calendar">
+          <ButtonToolbar>
+            <Button variant="primary" onClick={addModalOpen}>
+              New Interview
+            </Button>
 
-          <AddEventModal props={calendarEvents, setCalendarEvents} show={showModal} onHide={addModalClose} />
-        </ButtonToolbar>
-        <Calendar
-          plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
-          initialView="dayGridMonth"
-          weekends={true}
-          selectable={true}
-          editable={true}
-          events={calendarEvents}
-        />
-      </div>
+            <AddEventModal props={calendarEvents, setCalendarEvents} show={showModal} onHide={addModalClose} />
+          </ButtonToolbar>
+          <Calendar
+            plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+            initialView="dayGridMonth"
+            weekends={true}
+            selectable={true}
+            editable={true}
+            events={calendarEvents}
+          />
+        </div>
+      )}
     </InterviewStateContext.Provider>
   );
 }

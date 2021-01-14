@@ -15,6 +15,7 @@ import {
   CalendarIcon,
   MoonIcon,
   SunIcon,
+  StarIcon
 } from '@chakra-ui/icons';
 
 export default function Nav() {
@@ -78,10 +79,10 @@ export default function Nav() {
             mr="2"
             onClick={() => setCurrentPage('Aggregate')}
           >
-            Aggregate
+            <StarIcon />
           </Button>
           <Box mr="3" mt="4">
-            Signed in as: {currentUser} Id: {currentUserId}.
+            <span className='bold' >Signed in as:</span> {currentUser}.
           </Box>
         </div>
         : 
