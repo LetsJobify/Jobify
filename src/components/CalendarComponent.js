@@ -70,7 +70,7 @@ export default function CalendarComponent() {
   }
 
   // These are values used for the offer $ parsing.
-  const format = (val) => `$` + val;
+  const format = (val) => `` + val;
   const parse = (val) => val.replace(/^\$/, "");
   const value = formState.offer;
   const setValue = (val) => {
