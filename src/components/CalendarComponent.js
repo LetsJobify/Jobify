@@ -16,6 +16,24 @@ export default function CalendarComponent() {
   const [isLoading, setIsLoading] = useState(false);
   const [calendarEvents, setCalendarEvents] = useState([]);
 
+    // Interview form object state.
+    const [ formState, setFormState ] = useState({
+      new: true,
+      refresh: 0,
+      company: '',
+      date: '',
+      address: '',
+      notes: '',
+      feedback: '',
+      type: '',
+      rating: 0,
+      interviewer: '',
+      faq: '',
+      offer: '125,000.00',
+      accepted: 'false',
+      formId: '',
+    });
+
   useEffect( async () => {
     const request = {
       method: 'GET',
@@ -28,7 +46,6 @@ export default function CalendarComponent() {
     const response = await fetch(`/interview/all/user/${currentUserId}`, request);
     const serverResponse = await response.json();
     
-
     const responseObj = serverResponse.map(res => {
       console.log(res.iid);
        return { title: `${res.name}. ${res.offer}`, date: res.date.slice(0, 10), id: res.iid };
@@ -37,24 +54,9 @@ export default function CalendarComponent() {
     setCalendarEvents(responseObj);
     setIsLoading(false);
 
-  }, [AddEventModal]);
+  }, [AddEventModal, formState.refresh]);
 
-  // Interview form object state.
-  const [ formState, setFormState ] = useState({
-    new: true,
-    company: '',
-    date: '',
-    address: '',
-    notes: '',
-    feedback: '',
-    type: '',
-    rating: 0,
-    interviewer: '',
-    faq: '',
-    offer: '125,000.00',
-    accepted: 'false',
-    formId: '',
-  });
+
 
   // Slider in the interview form.
   // const [ sliderValue, setSliderValue ] = useState(0);
@@ -94,6 +96,7 @@ export default function CalendarComponent() {
     setModal(false);
     setFormState({
       new: true,
+      refresh: 0,
       company: '',
       date: '',
       address: '',
