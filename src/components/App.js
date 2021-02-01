@@ -50,7 +50,7 @@ export default function App() {
               <Home />
             </>
           )}
-          {currentPage === 'Aggregate' && (
+          {currentPage === 'Data' && (
             <>
               <Nav />
               <Aggregate />
