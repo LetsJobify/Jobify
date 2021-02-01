@@ -5,7 +5,7 @@ import { useColorMode, Image } from '@chakra-ui/react';
 import Nav from './Nav';
 import Home from './Home';
 import Register from './Register';
-import Aggregate from './Aggregate';
+import Data from './Aggregate';
 import Slack from './bulletinBoard'
 
 // Define a global state solution.
@@ -53,7 +53,7 @@ export default function App() {
           {currentPage === 'Data' && (
             <>
               <Nav />
-              <Aggregate />
+              <Data />
             </>
           )}
         </>
