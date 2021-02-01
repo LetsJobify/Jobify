@@ -10,6 +10,8 @@ import {
   InputRightElement,
   Spinner,
 } from '@chakra-ui/react';
+
+// Import icons to use in the form. (Looks pretty).
 import { EmailIcon, UnlockIcon } from '@chakra-ui/icons';
 
 export default function Register() {
