@@ -8,7 +8,7 @@
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development concurrently \" nodemon ./server/server.js\" \"webpack-dev-server --open\"",
     "test": "jest --forceExit",
-    "enzyme": "chai --enzyme_test"
+    "enzyme": "jest"
   },
   "author": "Jordan Grub, Wai Fai Lau, Spencer Stockton, Warren Tait",
   "license": "MIT",

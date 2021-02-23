@@ -7,19 +7,18 @@ import { it } from 'date-fns/locale';
 
 configure({ adapter: new Adaper() });
 
-describe('React unit tests.', () => {
-  describe('The user navbar.', () => {
-    let wrapper;
+describe('The user navbar.', () => {
+  let wrapper;
 
-    beforeAll(() => {
-      wrapper = shallow(<Nav />);
-
-      it('Renders a <div> tag', () => {
-        expect(wrapper.type()).toEqual('div');
-      }
-      
-    });
-
-
+  beforeAll(() => {
+    wrapper = shallow(<Nav bar='bar' />);
   });
+
+  it('Allows us to set props.', () => {
+    expect(wrapper.props().bar).to.equal('bar');
+  });
+
+  // it('Renders a <div> tag', () => {
+  //   expect(wrapper.type()).toEqual('div');
+  // });
 });
