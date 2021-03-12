@@ -1,7 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { Provider } from 'react-redux';
 import App from './components/App';
+import store from './store';
+
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import './stylesheets/styles.scss';
 
 const applicationColors = {
@@ -23,8 +26,10 @@ const applicationColors = {
 const totalApplicationTheme = extendTheme({ applicationColors });
 
 render(
-  <ChakraProvider theme={totalApplicationTheme}>
-    <App />
-  </ChakraProvider>,
+  <Provider store={store}>
+    <ChakraProvider theme={totalApplicationTheme}>
+      <App />
+    </ChakraProvider>
+  </Provider>,
   document.getElementById('root')
 );
