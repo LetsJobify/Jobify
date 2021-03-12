@@ -10,13 +10,18 @@ import {
   InputRightElement,
   Spinner,
 } from '@chakra-ui/react';
-
-// Import icons to use in the form. (Looks pretty).
 import { EmailIcon, UnlockIcon } from '@chakra-ui/icons';
 
 export default function Register() {
   // Importing color mode for day/night logic. setLogin defines if logged in. We need to know current user.
-  const { colorMode, setLogin, currentUser, setCurrentUser, currentUserId, setCurrentUserId } = useContext(GlobalStateContext);
+  const {
+    colorMode,
+    setLogin,
+    currentUser,
+    setCurrentUser,
+    currentUserId,
+    setCurrentUserId,
+  } = useContext(GlobalStateContext);
 
   // Set up "loading" state.
   const [isLoading, setIsLoading] = useState(false);
@@ -74,10 +79,8 @@ export default function Register() {
       setCurrentUser(registerState.registerEmail);
       setCurrentUserId(serverResponse.__id);
       setLogin(true);
-    
     } else {
       setLogin(false);
-
     }
     // Reset state values after login.
     setRegisterState({
@@ -126,52 +129,52 @@ export default function Register() {
   return (
     <div>
       {colorMode === 'dark' ? (
-      <>
-        <a className="jobify">
-        <img
-          src="https://i.ibb.co/wccm8rn/jobify-logo.png"
-          alt="jobify-logo"
-          border="0"
-        />
-        </a>
-      </>
+        <>
+          <a className='jobify'>
+            <img
+              src='https://i.ibb.co/wccm8rn/jobify-logo.png'
+              alt='jobify-logo'
+              border='0'
+            />
+          </a>
+        </>
       ) : (
-      <>
-        <a className="jobify">
-        <img
-          src="https://i.ibb.co/BC3J017/jobify-logo.png"
-          alt="jobify-logo"
-          border="0"
-        />
-        </a>
-      </>
+        <>
+          <a className='jobify'>
+            <img
+              src='https://i.ibb.co/BC3J017/jobify-logo.png'
+              alt='jobify-logo'
+              border='0'
+            />
+          </a>
+        </>
       )}
 
       {isLoading ? (
         <Center>
-          <Spinner size="xl" className="spinner" />
+          <Spinner size='xl' className='spinner' />
         </Center>
       ) : (
-        <div className="__register--Login">
+        <div className='__register--Login'>
           <div>
             {currentUserWindow ? (
               // This is JSX that renders the register component.
               <div>
                 <Box
                   bg={`${colorMode}.100`}
-                  maxW="lg"
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  overflow="hidden"
-                  pt="4"
-                  pr="4"
-                  pb="4"
-                  pl="4"
+                  maxW='lg'
+                  borderWidth='1px'
+                  borderRadius='lg'
+                  overflow='hidden'
+                  pt='4'
+                  pr='4'
+                  pb='4'
+                  pl='4'
                 >
                   <InputGroup>
                     <Input
-                      focusBorderColor="grey"
-                      placeholder="Enter first name"
+                      focusBorderColor='grey'
+                      placeholder='Enter first name'
                       value={registerState.firstName}
                       onChange={(e) =>
                         setRegisterState({
@@ -181,8 +184,8 @@ export default function Register() {
                       }
                     />
                     <Input
-                      focusBorderColor="grey"
-                      placeholder="Enter last name"
+                      focusBorderColor='grey'
+                      placeholder='Enter last name'
                       value={registerState.lastName}
                       onChange={(e) =>
                         setRegisterState({
@@ -194,12 +197,12 @@ export default function Register() {
                   </InputGroup>
                   <InputGroup>
                     <InputLeftElement
-                      pointerEvents="none"
+                      pointerEvents='none'
                       children={<EmailIcon />}
                     />
                     <Input
-                      focusBorderColor="grey"
-                      placeholder="Enter email address"
+                      focusBorderColor='grey'
+                      placeholder='Enter email address'
                       value={registerState.registerEmail}
                       onChange={(e) =>
                         setRegisterState({
@@ -211,14 +214,14 @@ export default function Register() {
                   </InputGroup>
                   <InputGroup>
                     <InputLeftElement
-                      pointerEvents="none"
+                      pointerEvents='none'
                       children={<UnlockIcon />}
                     />
                     <Input
-                      focusBorderColor="grey"
-                      pr="4.5rem"
+                      focusBorderColor='grey'
+                      pr='4.5rem'
                       type={show ? 'text' : 'password'}
-                      placeholder="Enter password"
+                      placeholder='Enter password'
                       value={registerState.registerPassword}
                       onChange={(e) =>
                         setRegisterState({
@@ -227,23 +230,23 @@ export default function Register() {
                         })
                       }
                     />
-                    <InputRightElement width="4.5rem">
-                      <Button h="1.75rem" size="sm" onClick={handleClick}>
+                    <InputRightElement width='4.5rem'>
+                      <Button h='1.75rem' size='sm' onClick={handleClick}>
                         {show ? 'Hide' : 'Show'}
                       </Button>
                     </InputRightElement>
                   </InputGroup>
-                  <Center mt="3" mb="3">
+                  <Center mt='3' mb='3'>
                     <Button
-                      variant="outline"
-                      height="48px"
-                      width="200px"
+                      variant='outline'
+                      height='48px'
+                      width='200px'
                       onClick={handleRegister}
                     >
                       Register
                     </Button>
                   </Center>
-                  <Button size="xs" mt="2" onClick={handleWindow}>
+                  <Button size='xs' mt='2' onClick={handleWindow}>
                     Log in instead?
                   </Button>
                 </Box>
@@ -253,22 +256,22 @@ export default function Register() {
               <div>
                 <Box
                   bg={`${colorMode}.400`}
-                  maxW="lg"
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  overflow="hidden"
-                  pt="4"
-                  pr="4"
-                  pb="4"
-                  pl="4"
+                  maxW='lg'
+                  borderWidth='1px'
+                  borderRadius='lg'
+                  overflow='hidden'
+                  pt='4'
+                  pr='4'
+                  pb='4'
+                  pl='4'
                 >
                   <InputGroup>
                     <InputLeftElement
-                      pointerEvents="none"
+                      pointerEvents='none'
                       children={<EmailIcon />}
                     />
                     <Input
-                      placeholder="Enter email address"
+                      placeholder='Enter email address'
                       value={loginState.loginEmail}
                       onChange={(e) =>
                         setLoginState({
@@ -280,13 +283,13 @@ export default function Register() {
                   </InputGroup>
                   <InputGroup>
                     <InputLeftElement
-                      pointerEvents="none"
+                      pointerEvents='none'
                       children={<UnlockIcon />}
                     />
                     <Input
-                      pr="4.5rem"
+                      pr='4.5rem'
                       type={show ? 'text' : 'password'}
-                      placeholder="Enter password"
+                      placeholder='Enter password'
                       value={loginState.loginPassword}
                       onChange={(e) =>
                         setLoginState({
@@ -295,23 +298,23 @@ export default function Register() {
                         })
                       }
                     />
-                    <InputRightElement width="4.5rem">
-                      <Button h="1.75rem" size="sm" onClick={handleClick}>
+                    <InputRightElement width='4.5rem'>
+                      <Button h='1.75rem' size='sm' onClick={handleClick}>
                         {show ? 'Hide' : 'Show'}
                       </Button>
                     </InputRightElement>
                   </InputGroup>
-                  <Center mt="3" mb="3">
+                  <Center mt='3' mb='3'>
                     <Button
-                      variant="outline"
-                      height="48px"
-                      width="200px"
+                      variant='outline'
+                      height='48px'
+                      width='200px'
                       onClick={handleLogin}
                     >
                       Login
                     </Button>
                   </Center>
-                  <Button size="xs" mt="2" onClick={handleWindow}>
+                  <Button size='xs' mt='2' onClick={handleWindow}>
                     Register instead?
                   </Button>
                 </Box>
