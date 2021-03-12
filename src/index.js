@@ -4,8 +4,7 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import App from './components/App';
 import './stylesheets/styles.scss';
 
-// Set color theme throughout application.
-const colors = {
+const applicationColors = {
   light: {
     100: '#f4f4f2',
     200: '#e8e8e8',
@@ -21,11 +20,10 @@ const colors = {
     500: '#0A1626',
   },
 };
-
-const theme = extendTheme({ colors });
+const totalApplicationTheme = extendTheme({ applicationColors });
 
 render(
-  <ChakraProvider theme={theme}>
+  <ChakraProvider theme={totalApplicationTheme}>
     <App />
   </ChakraProvider>,
   document.getElementById('root')
