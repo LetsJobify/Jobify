@@ -6,7 +6,6 @@ import Nav from './Nav';
 import Home from './Home';
 import Register from './Register';
 import Data from './Aggregate';
-import Slack from './bulletinBoard'
 
 // Define a global state solution.
 export const GlobalStateContext = React.createContext();
@@ -16,15 +15,15 @@ export default function App() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   // Who is the current user?
-  const [ currentUser, setCurrentUser ] = useState('');
-  const [ currentUserId, setCurrentUserId ] = useState('');
+  const [currentUser, setCurrentUser] = useState('');
+  const [currentUserId, setCurrentUserId] = useState('');
 
   // If the user is authenticated, render the Home.js component.
   // Otherwise, we need to render the Register.js component to allow them to register/sign in.
   const [loggedIn, setLogin] = useState(false);
 
   // Because React Router is not fucking working, fuck it, we'll do it live.
-  const [ currentPage, setCurrentPage ] = useState('Home');
+  const [currentPage, setCurrentPage] = useState('Home');
 
   // Define the values that will go into the Global State Context.
   const GlobalStateValue = {
@@ -37,7 +36,7 @@ export default function App() {
     currentUserId,
     setCurrentUserId,
     currentPage,
-    setCurrentPage
+    setCurrentPage,
   };
 
   return (
