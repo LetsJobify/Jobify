@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import * as actions from '../actions/actions';
-
+import { loginUser, logoutUser } from '../actions/actions';
+import { useDispatch } from 'react-redux';
 import { GlobalStateContext } from './App';
 import {
   Box,
@@ -14,21 +14,11 @@ import {
 } from '@chakra-ui/react';
 import { EmailIcon, UnlockIcon } from '@chakra-ui/icons';
 
-const mapDispatchToProps = (dispatch) => ({
-  LOG_IN_USER: () => dispatch(actions.loginUser()),
-});
-
 export default function Register() {
-  const {
-    colorMode,
-    loggedInStatus,
-    setLogin,
-    currentUser,
-    setCurrentUser,
-    currentUserId,
-    setCurrentUserId,
-  } = useContext(GlobalStateContext);
-
+  const dispatch = useDispatch();
+  const { colorMode, setCurrentUser, setCurrentUserId } = useContext(
+    GlobalStateContext
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -45,9 +35,7 @@ export default function Register() {
     loginPassword: '',
   });
 
-  // When a register button is submitted.
   const handleRegister = async (event) => {
-    // Pass values in state into the request body.
     const request = {
       method: 'POST',
       headers: {
@@ -62,22 +50,17 @@ export default function Register() {
       }),
     };
 
-    // We are loading now.
     setIsLoading(true);
-    // Send a request to the server.
     const response = await fetch('/user/', request);
     const serverResponse = await response.json();
 
-    // If successful new user.
     if (serverResponse['success'] === true) {
-      // "Log in" to the database.
       setCurrentUser(registerState.registerEmail);
       setCurrentUserId(serverResponse.__id);
-      setLogin(true);
+      dispatch(loginUser());
     } else {
-      setLogin(false);
+      dispatch(logoutUser());
     }
-    // Reset state values after login.
     setRegisterState({
       ...registerState,
       avatar: '',
@@ -113,9 +96,9 @@ export default function Register() {
       // "Log in" to the database.
       setCurrentUser(loginState.loginEmail);
       setCurrentUserId(serverResponse.__id);
-      setLogin(true);
+      dispatch(loginUser());
     } else {
-      setLogin(false);
+      dispatch(logoutUser());
     }
     // Reset state values after login.
     setLoginState({ ...loginState, loginEmail: '', loginPassword: '' });

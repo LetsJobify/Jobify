@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import * as actions from '../actions/actions';
 
 import { useColorMode } from '@chakra-ui/react';
 import Nav from './Nav';
@@ -12,8 +11,6 @@ export const GlobalStateContext = React.createContext();
 
 export default function App() {
   const loggedInStatus = useSelector((state) => state.loginStatus.loggedIn);
-  console.log('This is your login status from Redux', loggedInStatus);
-  const [loggedIn, setLogin] = useState(false);
 
   const { colorMode, toggleColorMode } = useColorMode();
   const [currentUser, setCurrentUser] = useState('');
@@ -24,8 +21,6 @@ export default function App() {
     colorMode,
     toggleColorMode,
     loggedInStatus,
-    loggedIn,
-    setLogin,
     currentUser,
     setCurrentUser,
     currentUserId,
@@ -36,7 +31,7 @@ export default function App() {
 
   return (
     <GlobalStateContext.Provider value={GlobalStateValue}>
-      {loggedIn ? (
+      {loggedInStatus ? (
         <>
           {currentPage === 'Home' && (
             <>
