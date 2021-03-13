@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import * as actions from '../actions/actions';
 
 import { useColorMode } from '@chakra-ui/react';
@@ -11,15 +11,19 @@ import Data from './Aggregate';
 export const GlobalStateContext = React.createContext();
 
 export default function App() {
+  const loggedInStatus = useSelector((state) => state.loginStatus.loggedIn);
+  console.log('This is your login status from Redux', loggedInStatus);
+  const [loggedIn, setLogin] = useState(false);
+
   const { colorMode, toggleColorMode } = useColorMode();
   const [currentUser, setCurrentUser] = useState('');
   const [currentUserId, setCurrentUserId] = useState('');
-  const [loggedIn, setLogin] = useState(false);
   const [currentPage, setCurrentPage] = useState('Home');
 
   const GlobalStateValue = {
     colorMode,
     toggleColorMode,
+    loggedInStatus,
     loggedIn,
     setLogin,
     currentUser,

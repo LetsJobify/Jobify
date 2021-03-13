@@ -1,4 +1,6 @@
 import React, { useState, useContext } from 'react';
+import * as actions from '../actions/actions';
+
 import { GlobalStateContext } from './App';
 import {
   Box,
@@ -12,10 +14,14 @@ import {
 } from '@chakra-ui/react';
 import { EmailIcon, UnlockIcon } from '@chakra-ui/icons';
 
+const mapDispatchToProps = (dispatch) => ({
+  LOG_IN_USER: () => dispatch(actions.loginUser()),
+});
+
 export default function Register() {
-  // Importing color mode for day/night logic. setLogin defines if logged in. We need to know current user.
   const {
     colorMode,
+    loggedInStatus,
     setLogin,
     currentUser,
     setCurrentUser,
@@ -23,28 +29,17 @@ export default function Register() {
     setCurrentUserId,
   } = useContext(GlobalStateContext);
 
-  // Set up "loading" state.
   const [isLoading, setIsLoading] = useState(false);
-
-  // Local state to show password values.
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-
-  // Local state to define whether the register or login component appears.
-  // True = register.
-  // False = login.
   const [currentUserWindow, setWindow] = useState(true);
   const handleWindow = () => setWindow(!currentUserWindow);
-
-  // Register object state.
   const [registerState, setRegisterState] = useState({
     firstName: '',
     lastName: '',
     registerEmail: '',
     registerPassword: '',
   });
-
-  // Login object state. * Do not confuse with setLogin - setLogin is for authorization.
   const [loginState, setLoginState] = useState({
     loginEmail: '',
     loginPassword: '',
