@@ -18,3 +18,8 @@ export const loginUser = () => ({
 export const logoutUser = () => ({
   type: types.LOG_OUT_USER,
 });
+
+export const switchPage = (payload) => ({
+  type: types.SWITCH_PAGE,
+  payload,
+});
