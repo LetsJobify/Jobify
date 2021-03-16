@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { switchPage } from '../actions/actions';
 
 import { useColorMode } from '@chakra-ui/react';
 import Nav from './Nav';
@@ -11,11 +12,14 @@ export const GlobalStateContext = React.createContext();
 
 export default function App() {
   const loggedInStatus = useSelector((state) => state.loginStatus.loggedIn);
+  const currentPage = useSelector((state) => state.currentPage);
+  const setCurrentPage = (pageToSwitchTo) => {
+    useDispatch(switchPage(pageToSwitchTo));
+  };
 
   const { colorMode, toggleColorMode } = useColorMode();
   const [currentUser, setCurrentUser] = useState('');
   const [currentUserId, setCurrentUserId] = useState('');
-  const [currentPage, setCurrentPage] = useState('Home');
 
   const GlobalStateValue = {
     colorMode,
